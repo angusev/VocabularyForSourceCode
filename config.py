@@ -26,6 +26,7 @@ class Config:
         config.RANDOM_CONTEXTS = True
         config.BEAM_WIDTH = 0
         config.USE_MOMENTUM = True
+        config.LASSO = 0
         return config
 
     def take_model_hyperparams_from(self, otherConfig):
@@ -68,6 +69,7 @@ class Config:
         self.BEAM_WIDTH = 1
         self.USE_MOMENTUM = True
         self.RELEASE = args.release
+        self.LASSO = args.lasso
 
     @staticmethod
     def get_debug_config(args):
@@ -96,4 +98,5 @@ class Config:
         config.RANDOM_CONTEXTS = True
         config.BEAM_WIDTH = 0
         config.USE_MOMENTUM = False
+        config.LASSO = 0
         return config

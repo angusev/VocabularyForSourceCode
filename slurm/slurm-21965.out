@@ -1,0 +1,1029 @@
+/home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:526: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:527: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:528: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:529: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:530: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/framework/dtypes.py:535: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+2020-01-29 19:14:13.339089: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+2020-01-29 19:14:13.700866: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2100000000 Hz
+2020-01-29 19:14:13.713625: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x56243e30d5b0 executing computations on platform Host. Devices:
+2020-01-29 19:14:13.713707: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2020-01-29 19:14:14.182369: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:1d:00.0
+totalMemory: 31.72GiB freeMemory: 30.17GiB
+2020-01-29 19:14:14.182459: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2020-01-29 19:14:14.200057: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-01-29 19:14:14.200121: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2020-01-29 19:14:14.200139: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2020-01-29 19:14:14.200756: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 29350 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-32GB, pci bus id: 0000:1d:00.0, compute capability: 7.0)
+2020-01-29 19:14:14.217856: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x56243ed54620 executing computations on platform CUDA. Devices:
+2020-01-29 19:14:14.217926: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): Tesla V100-SXM2-32GB, Compute Capability 7.0
+Dictionaries loaded.
+Loaded subtoken vocab. size: 73906
+Loaded target word vocab. size: 11319
+Loaded nodes vocab. size: 323
+Created model
+Starting training
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+WARNING:tensorflow:From /home/aagusev2/vocabularyForSourceCode/code2seq/reader.py:101: to_int64 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From /home/aagusev2/vocabularyForSourceCode/code2seq/reader.py:161: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From /home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/data/ops/dataset_ops.py:1419: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING:tensorflow:From /home/aagusev2/vocabularyForSourceCode/code2seq/model.py:480: LSTMCell.__init__ (from tensorflow.python.ops.rnn_cell_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This class is equivalent as tf.keras.layers.LSTMCell, and will be replaced by that in Tensorflow 2.0.
+WARNING:tensorflow:From /home/aagusev2/vocabularyForSourceCode/code2seq/model.py:492: bidirectional_dynamic_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.Bidirectional(keras.layers.RNN(cell))`, which is equivalent to this API
+WARNING:tensorflow:From /home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/ops/rnn.py:443: dynamic_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell)`, which is equivalent to this API
+WARNING:tensorflow:From /home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/ops/rnn.py:626: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+WARNING:tensorflow:From /home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/ops/rnn_cell_impl.py:1259: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+WARNING:tensorflow:From /home/aagusev2/vocabularyForSourceCode/code2seq/model.py:539: dense (from tensorflow.python.layers.core) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.dense instead.
+WARNING:tensorflow:From /home/aagusev2/vocabularyForSourceCode/code2seq/model.py:406: MultiRNNCell.__init__ (from tensorflow.python.ops.rnn_cell_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This class is equivalent as tf.keras.layers.StackedRNNCells, and will be replaced by that in Tensorflow 2.0.
+Training batch size:			 512
+Dataset path:				 data/java-small/java-small
+Training file path:			 data/java-small/java-small.train.c2s
+Validation path:			 data/java-small/java-small.val.c2s
+Taking max contexts from each example:	 200
+Random path sampling:			 True
+Embedding size:				 128
+Using BiLSTMs, each of size:		 128
+Decoder size:				 320
+Decoder layers:				 1
+Max path lengths:			 9
+Max subtokens in a token:		 5
+Max target length:			 6
+Embeddings dropout keep_prob:		 0.75
+LSTM dropout keep_prob:			 0.5
+============================================
+Number of trainable params: 16290752
+Initalized variables
+Started reader...
+2020-01-29 19:14:45.991860: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+Average loss at batch 100: 29.000560, 	throughput: 226 samples/sec
+Average loss at batch 200: 19.723686, 	throughput: 243 samples/sec
+Average loss at batch 300: 18.106128, 	throughput: 208 samples/sec
+Average loss at batch 400: 17.363134, 	throughput: 192 samples/sec
+Average loss at batch 500: 16.720799, 	throughput: 195 samples/sec
+Average loss at batch 600: 16.223105, 	throughput: 179 samples/sec
+Average loss at batch 700: 15.906058, 	throughput: 196 samples/sec
+Average loss at batch 800: 15.486345, 	throughput: 190 samples/sec
+Average loss at batch 900: 14.968304, 	throughput: 194 samples/sec
+Average loss at batch 1000: 14.516772, 	throughput: 185 samples/sec
+Average loss at batch 1100: 14.257213, 	throughput: 179 samples/sec
+Average loss at batch 1200: 13.873219, 	throughput: 189 samples/sec
+Average loss at batch 1300: 13.636896, 	throughput: 193 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m48s
+Accuracy after 1 epochs: 0.04144
+After 1 epochs: Precision: 0.38762, recall: 0.22256, F1: 0.28276
+Rouge:  {'rouge-1': {'f': 0.2568756662763018, 'p': 0.3851912430800199, 'r': 0.21038280811808274}, 'rouge-2': {'f': 0.01970606550684274, 'p': 0.02125622099200358, 'r': 0.019458074707823063}, 'rouge-l': {'f': 0.21942400417769112, 'p': 0.38512833417211856, 'r': 0.21033038402816495}}
+Saved after 1 epochs in: models/java-small-model/model_iter1
+Average loss at batch 1400: 13.172577, 	throughput: 188 samples/sec
+Average loss at batch 1500: 13.019005, 	throughput: 615 samples/sec
+Average loss at batch 1600: 12.749995, 	throughput: 663 samples/sec
+Average loss at batch 1700: 12.553123, 	throughput: 638 samples/sec
+Average loss at batch 1800: 12.376994, 	throughput: 636 samples/sec
+Average loss at batch 1900: 12.061082, 	throughput: 635 samples/sec
+Average loss at batch 2000: 12.003277, 	throughput: 636 samples/sec
+Average loss at batch 2100: 11.829698, 	throughput: 635 samples/sec
+Average loss at batch 2200: 11.616697, 	throughput: 635 samples/sec
+Average loss at batch 2300: 11.480080, 	throughput: 636 samples/sec
+Average loss at batch 2400: 11.305288, 	throughput: 633 samples/sec
+Average loss at batch 2500: 11.294304, 	throughput: 632 samples/sec
+Average loss at batch 2600: 11.162918, 	throughput: 632 samples/sec
+Average loss at batch 2700: 11.062670, 	throughput: 569 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 2 epochs: 0.07864
+After 2 epochs: Precision: 0.43002, recall: 0.27027, F1: 0.33192
+Rouge:  {'rouge-1': {'f': 0.30147441430903416, 'p': 0.41454873343398735, 'r': 0.2599763133891143}, 'rouge-2': {'f': 0.04732004696615251, 'p': 0.051103002851870485, 'r': 0.046799384491256694}, 'rouge-l': {'f': 0.2669161054132261, 'p': 0.41443689537549616, 'r': 0.25990816207222117}}
+Saved after 2 epochs in: models/java-small-model/model_iter2
+Average loss at batch 2800: 10.789879, 	throughput: 439 samples/sec
+Average loss at batch 2900: 10.837036, 	throughput: 656 samples/sec
+Average loss at batch 3000: 10.629542, 	throughput: 650 samples/sec
+Average loss at batch 3100: 10.672795, 	throughput: 634 samples/sec
+Average loss at batch 3200: 10.672666, 	throughput: 637 samples/sec
+Average loss at batch 3300: 10.461894, 	throughput: 635 samples/sec
+Average loss at batch 3400: 10.423734, 	throughput: 634 samples/sec
+Average loss at batch 3500: 10.343475, 	throughput: 637 samples/sec
+Average loss at batch 3600: 10.172101, 	throughput: 635 samples/sec
+Average loss at batch 3700: 10.091609, 	throughput: 636 samples/sec
+Average loss at batch 3800: 10.105685, 	throughput: 633 samples/sec
+Average loss at batch 3900: 10.036754, 	throughput: 634 samples/sec
+Average loss at batch 4000: 9.979331, 	throughput: 633 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 3 epochs: 0.13144
+After 3 epochs: Precision: 0.44335, recall: 0.29867, F1: 0.35690
+Rouge:  {'rouge-1': {'f': 0.34683117686182025, 'p': 0.4362348319633165, 'r': 0.31347152051102034}, 'rouge-2': {'f': 0.06073835052320493, 'p': 0.06453754962813843, 'r': 0.06010951142745301}, 'rouge-l': {'f': 0.3180120254971753, 'p': 0.4360251356036453, 'r': 0.3133166946987964}}
+Saved after 3 epochs in: models/java-small-model/model_iter3
+Average loss at batch 4100: 9.842962, 	throughput: 426 samples/sec
+Average loss at batch 4200: 9.819086, 	throughput: 614 samples/sec
+Average loss at batch 4300: 9.747376, 	throughput: 665 samples/sec
+Average loss at batch 4400: 9.701710, 	throughput: 634 samples/sec
+Average loss at batch 4500: 9.745760, 	throughput: 635 samples/sec
+Average loss at batch 4600: 9.528200, 	throughput: 628 samples/sec
+Average loss at batch 4700: 9.589166, 	throughput: 629 samples/sec
+Average loss at batch 4800: 9.522707, 	throughput: 630 samples/sec
+Average loss at batch 4900: 9.448447, 	throughput: 632 samples/sec
+Average loss at batch 5000: 9.380846, 	throughput: 631 samples/sec
+Average loss at batch 5100: 9.310241, 	throughput: 633 samples/sec
+Average loss at batch 5200: 9.351790, 	throughput: 631 samples/sec
+Average loss at batch 5300: 9.299588, 	throughput: 634 samples/sec
+Average loss at batch 5400: 9.235788, 	throughput: 587 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 4 epochs: 0.14184
+After 4 epochs: Precision: 0.43746, recall: 0.30761, F1: 0.36122
+Rouge:  {'rouge-1': {'f': 0.3555595684145171, 'p': 0.43855547167701203, 'r': 0.3253534987398783}, 'rouge-2': {'f': 0.06711974658603839, 'p': 0.07118841916904323, 'r': 0.06665413481279096}, 'rouge-l': {'f': 0.3279978471123275, 'p': 0.43813258401834154, 'r': 0.3249784917499996}}
+Saved after 4 epochs in: models/java-small-model/model_iter4
+Average loss at batch 5500: 9.105761, 	throughput: 430 samples/sec
+Average loss at batch 5600: 9.183700, 	throughput: 659 samples/sec
+Average loss at batch 5700: 9.033989, 	throughput: 648 samples/sec
+Average loss at batch 5800: 9.110066, 	throughput: 636 samples/sec
+Average loss at batch 5900: 9.062856, 	throughput: 634 samples/sec
+Average loss at batch 6000: 8.966710, 	throughput: 633 samples/sec
+Average loss at batch 6100: 8.985400, 	throughput: 633 samples/sec
+Average loss at batch 6200: 8.952931, 	throughput: 633 samples/sec
+Average loss at batch 6300: 8.845019, 	throughput: 635 samples/sec
+Average loss at batch 6400: 8.813437, 	throughput: 631 samples/sec
+Average loss at batch 6500: 8.830722, 	throughput: 633 samples/sec
+Average loss at batch 6600: 8.784317, 	throughput: 637 samples/sec
+Average loss at batch 6700: 8.771256, 	throughput: 629 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 5 epochs: 0.14754
+After 5 epochs: Precision: 0.44508, recall: 0.32069, F1: 0.37278
+Rouge:  {'rouge-1': {'f': 0.36509441749734595, 'p': 0.44389306039123605, 'r': 0.33760853457358597}, 'rouge-2': {'f': 0.07317484245734754, 'p': 0.07742564704895338, 'r': 0.07286169721884295}, 'rouge-l': {'f': 0.3376924451106767, 'p': 0.44324845840849053, 'r': 0.3370600635806751}}
+Saved after 5 epochs in: models/java-small-model/model_iter5
+Average loss at batch 6800: 8.685290, 	throughput: 424 samples/sec
+Average loss at batch 6900: 8.695425, 	throughput: 609 samples/sec
+Average loss at batch 7000: 8.654928, 	throughput: 665 samples/sec
+Average loss at batch 7100: 8.594580, 	throughput: 635 samples/sec
+Average loss at batch 7200: 8.701333, 	throughput: 636 samples/sec
+Average loss at batch 7300: 8.535775, 	throughput: 634 samples/sec
+Average loss at batch 7400: 8.599047, 	throughput: 635 samples/sec
+Average loss at batch 7500: 8.506083, 	throughput: 635 samples/sec
+Average loss at batch 7600: 8.515934, 	throughput: 634 samples/sec
+Average loss at batch 7700: 8.406123, 	throughput: 635 samples/sec
+Average loss at batch 7800: 8.414639, 	throughput: 633 samples/sec
+Average loss at batch 7900: 8.435160, 	throughput: 635 samples/sec
+Average loss at batch 8000: 8.439515, 	throughput: 638 samples/sec
+Average loss at batch 8100: 8.367628, 	throughput: 606 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 6 epochs: 0.15492
+After 6 epochs: Precision: 0.44141, recall: 0.32475, F1: 0.37420
+Rouge:  {'rouge-1': {'f': 0.36900774424332267, 'p': 0.44134999860190766, 'r': 0.3435612294527171}, 'rouge-2': {'f': 0.08007255330526225, 'p': 0.08557028213516761, 'r': 0.07918389316971634}, 'rouge-l': {'f': 0.34320488880319694, 'p': 0.4405950283812886, 'r': 0.3429946522640024}}
+Saved after 6 epochs in: models/java-small-model/model_iter6
+Average loss at batch 8200: 8.272715, 	throughput: 422 samples/sec
+Average loss at batch 8300: 8.361309, 	throughput: 663 samples/sec
+Average loss at batch 8400: 8.237028, 	throughput: 645 samples/sec
+Average loss at batch 8500: 8.308858, 	throughput: 635 samples/sec
+Average loss at batch 8600: 8.315852, 	throughput: 635 samples/sec
+Average loss at batch 8700: 8.198154, 	throughput: 631 samples/sec
+Average loss at batch 8800: 8.250111, 	throughput: 632 samples/sec
+Average loss at batch 8900: 8.236313, 	throughput: 630 samples/sec
+Average loss at batch 9000: 8.132621, 	throughput: 628 samples/sec
+Average loss at batch 9100: 8.130474, 	throughput: 631 samples/sec
+Average loss at batch 9200: 8.175640, 	throughput: 630 samples/sec
+Average loss at batch 9300: 8.127314, 	throughput: 631 samples/sec
+Average loss at batch 9400: 8.090317, 	throughput: 631 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 7 epochs: 0.15769
+After 7 epochs: Precision: 0.45015, recall: 0.32821, F1: 0.37963
+Rouge:  {'rouge-1': {'f': 0.3739008227766732, 'p': 0.447636722026507, 'r': 0.34884502089458774}, 'rouge-2': {'f': 0.08449718698408132, 'p': 0.0909935413521221, 'r': 0.08279046940030817}, 'rouge-l': {'f': 0.3471558297519917, 'p': 0.4465917351674779, 'r': 0.34808137665145145}}
+Saved after 7 epochs in: models/java-small-model/model_iter7
+Average loss at batch 9500: 8.028793, 	throughput: 433 samples/sec
+Average loss at batch 9600: 8.056423, 	throughput: 597 samples/sec
+Average loss at batch 9700: 8.039325, 	throughput: 666 samples/sec
+Average loss at batch 9800: 7.976884, 	throughput: 635 samples/sec
+Average loss at batch 9900: 8.095810, 	throughput: 634 samples/sec
+Average loss at batch 10000: 7.929263, 	throughput: 635 samples/sec
+Average loss at batch 10100: 8.011624, 	throughput: 632 samples/sec
+Average loss at batch 10200: 7.928879, 	throughput: 638 samples/sec
+Average loss at batch 10300: 7.950587, 	throughput: 634 samples/sec
+Average loss at batch 10400: 7.868910, 	throughput: 635 samples/sec
+Average loss at batch 10500: 7.870436, 	throughput: 633 samples/sec
+Average loss at batch 10600: 7.917556, 	throughput: 636 samples/sec
+Average loss at batch 10700: 7.895930, 	throughput: 635 samples/sec
+Average loss at batch 10800: 7.854441, 	throughput: 634 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 8 epochs: 0.16071
+After 8 epochs: Precision: 0.45186, recall: 0.33688, F1: 0.38599
+Rouge:  {'rouge-1': {'f': 0.38083301146497606, 'p': 0.45228658110337666, 'r': 0.3566755929760242}, 'rouge-2': {'f': 0.0881242041431864, 'p': 0.09492492240583844, 'r': 0.08627307352770805}, 'rouge-l': {'f': 0.35445207457299993, 'p': 0.45113315437743085, 'r': 0.35583219337308264}}
+Saved after 8 epochs in: models/java-small-model/model_iter8
+Average loss at batch 10900: 7.752468, 	throughput: 410 samples/sec
+Average loss at batch 11000: 7.845546, 	throughput: 660 samples/sec
+Average loss at batch 11100: 7.750780, 	throughput: 641 samples/sec
+Average loss at batch 11200: 7.824277, 	throughput: 634 samples/sec
+Average loss at batch 11300: 7.810900, 	throughput: 633 samples/sec
+Average loss at batch 11400: 7.673472, 	throughput: 631 samples/sec
+Average loss at batch 11500: 7.786213, 	throughput: 630 samples/sec
+Average loss at batch 11600: 7.758088, 	throughput: 633 samples/sec
+Average loss at batch 11700: 7.671418, 	throughput: 629 samples/sec
+Average loss at batch 11800: 7.637336, 	throughput: 633 samples/sec
+Average loss at batch 11900: 7.707841, 	throughput: 629 samples/sec
+Average loss at batch 12000: 7.696618, 	throughput: 634 samples/sec
+Average loss at batch 12100: 7.651166, 	throughput: 634 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 9 epochs: 0.16306
+After 9 epochs: Precision: 0.44544, recall: 0.33682, F1: 0.38359
+Rouge:  {'rouge-1': {'f': 0.38089939693807534, 'p': 0.4503739585080816, 'r': 0.3578895108367878}, 'rouge-2': {'f': 0.0904040035787386, 'p': 0.0969635967119611, 'r': 0.08871119618791971}, 'rouge-l': {'f': 0.3549677276993065, 'p': 0.4493534362243482, 'r': 0.3571248181118532}}
+Average loss at batch 12200: 7.617406, 	throughput: 431 samples/sec
+Average loss at batch 12300: 7.634970, 	throughput: 596 samples/sec
+Average loss at batch 12400: 7.605250, 	throughput: 661 samples/sec
+Average loss at batch 12500: 7.534703, 	throughput: 647 samples/sec
+Average loss at batch 12600: 7.650590, 	throughput: 637 samples/sec
+Average loss at batch 12700: 7.552578, 	throughput: 636 samples/sec
+Average loss at batch 12800: 7.579649, 	throughput: 633 samples/sec
+Average loss at batch 12900: 7.542968, 	throughput: 630 samples/sec
+Average loss at batch 13000: 7.554819, 	throughput: 632 samples/sec
+Average loss at batch 13100: 7.504470, 	throughput: 630 samples/sec
+Average loss at batch 13200: 7.456272, 	throughput: 629 samples/sec
+Average loss at batch 13300: 7.540099, 	throughput: 634 samples/sec
+Average loss at batch 13400: 7.505243, 	throughput: 635 samples/sec
+Average loss at batch 13500: 7.490337, 	throughput: 634 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 10 epochs: 0.16587
+After 10 epochs: Precision: 0.45436, recall: 0.33880, F1: 0.38817
+Rouge:  {'rouge-1': {'f': 0.3841730737346621, 'p': 0.4564162787121322, 'r': 0.35967098895316274}, 'rouge-2': {'f': 0.09131395238894842, 'p': 0.09785541528610775, 'r': 0.0896102579772838}, 'rouge-l': {'f': 0.35751681134808655, 'p': 0.4552209593311818, 'r': 0.35882203258581524}}
+Saved after 10 epochs in: models/java-small-model/model_iter10
+Average loss at batch 13600: 7.389009, 	throughput: 408 samples/sec
+Average loss at batch 13700: 7.470916, 	throughput: 638 samples/sec
+Average loss at batch 13800: 7.400365, 	throughput: 648 samples/sec
+Average loss at batch 13900: 7.458082, 	throughput: 632 samples/sec
+Average loss at batch 14000: 7.462078, 	throughput: 635 samples/sec
+Average loss at batch 14100: 7.346653, 	throughput: 631 samples/sec
+Average loss at batch 14200: 7.443123, 	throughput: 631 samples/sec
+Average loss at batch 14300: 7.416154, 	throughput: 631 samples/sec
+Average loss at batch 14400: 7.366541, 	throughput: 634 samples/sec
+Average loss at batch 14500: 7.302895, 	throughput: 632 samples/sec
+Average loss at batch 14600: 7.384959, 	throughput: 632 samples/sec
+Average loss at batch 14700: 7.358792, 	throughput: 634 samples/sec
+Average loss at batch 14800: 7.327887, 	throughput: 631 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 11 epochs: 0.16809
+After 11 epochs: Precision: 0.44803, recall: 0.34754, F1: 0.39144
+Rouge:  {'rouge-1': {'f': 0.3873945661837167, 'p': 0.4543639642662431, 'r': 0.36614587011872896}, 'rouge-2': {'f': 0.09499467331015857, 'p': 0.10124494960086122, 'r': 0.09372482289900388}, 'rouge-l': {'f': 0.3615255371263623, 'p': 0.45314417928392753, 'r': 0.3651983523287409}}
+Saved after 11 epochs in: models/java-small-model/model_iter11
+Average loss at batch 14900: 7.274427, 	throughput: 431 samples/sec
+Average loss at batch 15000: 7.320304, 	throughput: 581 samples/sec
+Average loss at batch 15100: 7.307467, 	throughput: 668 samples/sec
+Average loss at batch 15200: 7.220224, 	throughput: 635 samples/sec
+Average loss at batch 15300: 7.374637, 	throughput: 633 samples/sec
+Average loss at batch 15400: 7.240227, 	throughput: 630 samples/sec
+Average loss at batch 15500: 7.261599, 	throughput: 631 samples/sec
+Average loss at batch 15600: 7.261199, 	throughput: 631 samples/sec
+Average loss at batch 15700: 7.239517, 	throughput: 632 samples/sec
+Average loss at batch 15800: 7.211610, 	throughput: 634 samples/sec
+Average loss at batch 15900: 7.168589, 	throughput: 632 samples/sec
+Average loss at batch 16000: 7.238619, 	throughput: 632 samples/sec
+Average loss at batch 16100: 7.235556, 	throughput: 632 samples/sec
+Average loss at batch 16200: 7.226722, 	throughput: 631 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 12 epochs: 0.16922
+After 12 epochs: Precision: 0.44800, recall: 0.34157, F1: 0.38761
+Rouge:  {'rouge-1': {'f': 0.38595780376809746, 'p': 0.45588736962782955, 'r': 0.3631938097041642}, 'rouge-2': {'f': 0.09480532136517685, 'p': 0.10175600480943994, 'r': 0.09304763302854896}, 'rouge-l': {'f': 0.35961239353561736, 'p': 0.4545871431367632, 'r': 0.36223040711862386}}
+Average loss at batch 16300: 7.096751, 	throughput: 414 samples/sec
+Average loss at batch 16400: 7.210538, 	throughput: 639 samples/sec
+Average loss at batch 16500: 7.138549, 	throughput: 658 samples/sec
+Average loss at batch 16600: 7.183365, 	throughput: 637 samples/sec
+Average loss at batch 16700: 7.192824, 	throughput: 637 samples/sec
+Average loss at batch 16800: 7.087176, 	throughput: 636 samples/sec
+Average loss at batch 16900: 7.169784, 	throughput: 636 samples/sec
+Average loss at batch 17000: 7.121592, 	throughput: 631 samples/sec
+Average loss at batch 17100: 7.123571, 	throughput: 636 samples/sec
+Average loss at batch 17200: 7.059106, 	throughput: 631 samples/sec
+Average loss at batch 17300: 7.108401, 	throughput: 632 samples/sec
+Average loss at batch 17400: 7.095406, 	throughput: 634 samples/sec
+Average loss at batch 17500: 7.091967, 	throughput: 633 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 13 epochs: 0.17120
+After 13 epochs: Precision: 0.44635, recall: 0.34453, F1: 0.38889
+Rouge:  {'rouge-1': {'f': 0.38566991904726605, 'p': 0.45024883968014323, 'r': 0.3654742659901135}, 'rouge-2': {'f': 0.09796794488769417, 'p': 0.10443228205558354, 'r': 0.09660391752742034}, 'rouge-l': {'f': 0.36034982540571076, 'p': 0.44882989431303455, 'r': 0.3644130359844947}}
+Average loss at batch 17600: 7.007983, 	throughput: 440 samples/sec
+Average loss at batch 17700: 7.084919, 	throughput: 578 samples/sec
+Average loss at batch 17800: 7.055283, 	throughput: 669 samples/sec
+Average loss at batch 17900: 6.995027, 	throughput: 637 samples/sec
+Average loss at batch 18000: 7.106931, 	throughput: 635 samples/sec
+Average loss at batch 18100: 7.024782, 	throughput: 635 samples/sec
+Average loss at batch 18200: 7.038210, 	throughput: 634 samples/sec
+Average loss at batch 18300: 7.013614, 	throughput: 635 samples/sec
+Average loss at batch 18400: 7.021092, 	throughput: 631 samples/sec
+Average loss at batch 18500: 6.964398, 	throughput: 634 samples/sec
+Average loss at batch 18600: 6.962203, 	throughput: 632 samples/sec
+Average loss at batch 18700: 7.010746, 	throughput: 635 samples/sec
+Average loss at batch 18800: 7.001744, 	throughput: 632 samples/sec
+Average loss at batch 18900: 6.999972, 	throughput: 635 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 14 epochs: 0.17292
+After 14 epochs: Precision: 0.44634, recall: 0.34066, F1: 0.38640
+Rouge:  {'rouge-1': {'f': 0.38349293008394303, 'p': 0.44628278253089526, 'r': 0.3633579153143772}, 'rouge-2': {'f': 0.09744171293553909, 'p': 0.10366968629424596, 'r': 0.09612860577883221}, 'rouge-l': {'f': 0.3590578563098049, 'p': 0.4448184029525246, 'r': 0.36223452531642697}}
+Average loss at batch 19000: 6.893753, 	throughput: 416 samples/sec
+Average loss at batch 19100: 6.984098, 	throughput: 642 samples/sec
+Average loss at batch 19200: 6.891783, 	throughput: 656 samples/sec
+Average loss at batch 19300: 6.975975, 	throughput: 637 samples/sec
+Average loss at batch 19400: 6.980133, 	throughput: 629 samples/sec
+Average loss at batch 19500: 6.849837, 	throughput: 637 samples/sec
+Average loss at batch 19600: 6.975214, 	throughput: 632 samples/sec
+Average loss at batch 19700: 6.889935, 	throughput: 633 samples/sec
+Average loss at batch 19800: 6.918214, 	throughput: 633 samples/sec
+Average loss at batch 19900: 6.855508, 	throughput: 634 samples/sec
+Average loss at batch 20000: 6.868547, 	throughput: 636 samples/sec
+Average loss at batch 20100: 6.917004, 	throughput: 636 samples/sec
+Average loss at batch 20200: 6.906672, 	throughput: 633 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 15 epochs: 0.17338
+After 15 epochs: Precision: 0.44450, recall: 0.34543, F1: 0.38875
+Rouge:  {'rouge-1': {'f': 0.3853410439644962, 'p': 0.44631283900911456, 'r': 0.3667758646086476}, 'rouge-2': {'f': 0.09976551169809401, 'p': 0.10647262763518428, 'r': 0.09824858604740341}, 'rouge-l': {'f': 0.3609911410771458, 'p': 0.4449043784599897, 'r': 0.36567642326637717}}
+Average loss at batch 20300: 6.797187, 	throughput: 442 samples/sec
+Average loss at batch 20400: 6.886611, 	throughput: 565 samples/sec
+Average loss at batch 20500: 6.883134, 	throughput: 664 samples/sec
+Average loss at batch 20600: 6.773974, 	throughput: 646 samples/sec
+Average loss at batch 20700: 6.928097, 	throughput: 633 samples/sec
+Average loss at batch 20800: 6.840496, 	throughput: 633 samples/sec
+Average loss at batch 20900: 6.818782, 	throughput: 633 samples/sec
+Average loss at batch 21000: 6.846387, 	throughput: 631 samples/sec
+Average loss at batch 21100: 6.823842, 	throughput: 633 samples/sec
+Average loss at batch 21200: 6.763084, 	throughput: 633 samples/sec
+Average loss at batch 21300: 6.781362, 	throughput: 631 samples/sec
+Average loss at batch 21400: 6.803144, 	throughput: 632 samples/sec
+Average loss at batch 21500: 6.800857, 	throughput: 627 samples/sec
+Average loss at batch 21600: 6.834877, 	throughput: 630 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 16 epochs: 0.17392
+After 16 epochs: Precision: 0.45020, recall: 0.34438, F1: 0.39024
+Rouge:  {'rouge-1': {'f': 0.3871324660680038, 'p': 0.45161955488452793, 'r': 0.36657419147982295}, 'rouge-2': {'f': 0.09773116048270138, 'p': 0.10393390370743165, 'r': 0.09645493325664437}, 'rouge-l': {'f': 0.3620006643231554, 'p': 0.4502250740927138, 'r': 0.36544026673618407}}
+Average loss at batch 21700: 6.726976, 	throughput: 420 samples/sec
+Average loss at batch 21800: 6.798329, 	throughput: 639 samples/sec
+Average loss at batch 21900: 6.749043, 	throughput: 657 samples/sec
+Average loss at batch 22000: 6.769512, 	throughput: 635 samples/sec
+Average loss at batch 22100: 6.828989, 	throughput: 634 samples/sec
+Average loss at batch 22200: 6.693841, 	throughput: 633 samples/sec
+Average loss at batch 22300: 6.783545, 	throughput: 635 samples/sec
+Average loss at batch 22400: 6.744736, 	throughput: 634 samples/sec
+Average loss at batch 22500: 6.723697, 	throughput: 635 samples/sec
+Average loss at batch 22600: 6.684931, 	throughput: 633 samples/sec
+Average loss at batch 22700: 6.699878, 	throughput: 636 samples/sec
+Average loss at batch 22800: 6.761480, 	throughput: 634 samples/sec
+Average loss at batch 22900: 6.726767, 	throughput: 632 samples/sec
+Average loss at batch 23000: 6.708041, 	throughput: 573 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 17 epochs: 0.17464
+After 17 epochs: Precision: 0.44612, recall: 0.34631, F1: 0.38993
+Rouge:  {'rouge-1': {'f': 0.3871326476159647, 'p': 0.4485712688027732, 'r': 0.3682121681744176}, 'rouge-2': {'f': 0.10011863068331142, 'p': 0.10640412682435836, 'r': 0.09862878551856916}, 'rouge-l': {'f': 0.3627066752029563, 'p': 0.44722571716155013, 'r': 0.36713194899845114}}
+Average loss at batch 23100: 6.653871, 	throughput: 434 samples/sec
+Average loss at batch 23200: 6.727710, 	throughput: 667 samples/sec
+Average loss at batch 23300: 6.612756, 	throughput: 646 samples/sec
+Average loss at batch 23400: 6.754810, 	throughput: 635 samples/sec
+Average loss at batch 23500: 6.708111, 	throughput: 631 samples/sec
+Average loss at batch 23600: 6.684405, 	throughput: 631 samples/sec
+Average loss at batch 23700: 6.693258, 	throughput: 633 samples/sec
+Average loss at batch 23800: 6.660125, 	throughput: 634 samples/sec
+Average loss at batch 23900: 6.636465, 	throughput: 635 samples/sec
+Average loss at batch 24000: 6.596011, 	throughput: 631 samples/sec
+Average loss at batch 24100: 6.676569, 	throughput: 634 samples/sec
+Average loss at batch 24200: 6.651765, 	throughput: 634 samples/sec
+Average loss at batch 24300: 6.663283, 	throughput: 634 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 18 epochs: 0.17543
+After 18 epochs: Precision: 0.44815, recall: 0.34646, F1: 0.39080
+Rouge:  {'rouge-1': {'f': 0.3867773892993922, 'p': 0.4451084829167366, 'r': 0.36867945820511966}, 'rouge-2': {'f': 0.10055168240572926, 'p': 0.10713317116814856, 'r': 0.09914179268419329}, 'rouge-l': {'f': 0.3631980782858612, 'p': 0.4437489515182016, 'r': 0.36759120066869905}}
+Average loss at batch 24400: 6.549213, 	throughput: 421 samples/sec
+Average loss at batch 24500: 6.660860, 	throughput: 621 samples/sec
+Average loss at batch 24600: 6.615398, 	throughput: 660 samples/sec
+Average loss at batch 24700: 6.611765, 	throughput: 636 samples/sec
+Average loss at batch 24800: 6.676426, 	throughput: 635 samples/sec
+Average loss at batch 24900: 6.570278, 	throughput: 634 samples/sec
+Average loss at batch 25000: 6.622190, 	throughput: 636 samples/sec
+Average loss at batch 25100: 6.616601, 	throughput: 634 samples/sec
+Average loss at batch 25200: 6.583951, 	throughput: 635 samples/sec
+Average loss at batch 25300: 6.549471, 	throughput: 637 samples/sec
+Average loss at batch 25400: 6.538946, 	throughput: 629 samples/sec
+Average loss at batch 25500: 6.619735, 	throughput: 633 samples/sec
+Average loss at batch 25600: 6.599635, 	throughput: 629 samples/sec
+Average loss at batch 25700: 6.561113, 	throughput: 576 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 19 epochs: 0.17476
+After 19 epochs: Precision: 0.44905, recall: 0.34708, F1: 0.39153
+Rouge:  {'rouge-1': {'f': 0.3882653952614264, 'p': 0.4483797461276072, 'r': 0.36965830749801115}, 'rouge-2': {'f': 0.10018051682885909, 'p': 0.10671168148520944, 'r': 0.09845943074428232}, 'rouge-l': {'f': 0.3639769492729863, 'p': 0.44668679751719514, 'r': 0.36829604671828625}}
+WARNING:tensorflow:From /home/aagusev2/anaconda3/envs/tf_env/lib/python3.7/site-packages/tensorflow/python/training/saver.py:966: remove_checkpoint (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to delete files with this prefix.
+Saved after 19 epochs in: models/java-small-model/model_iter19
+Average loss at batch 25800: 6.502646, 	throughput: 436 samples/sec
+Average loss at batch 25900: 6.604640, 	throughput: 660 samples/sec
+Average loss at batch 26000: 6.479446, 	throughput: 648 samples/sec
+Average loss at batch 26100: 6.583392, 	throughput: 634 samples/sec
+Average loss at batch 26200: 6.586388, 	throughput: 633 samples/sec
+Average loss at batch 26300: 6.540911, 	throughput: 635 samples/sec
+Average loss at batch 26400: 6.565702, 	throughput: 630 samples/sec
+Average loss at batch 26500: 6.506898, 	throughput: 633 samples/sec
+Average loss at batch 26600: 6.504569, 	throughput: 634 samples/sec
+Average loss at batch 26700: 6.469273, 	throughput: 632 samples/sec
+Average loss at batch 26800: 6.518587, 	throughput: 633 samples/sec
+Average loss at batch 26900: 6.525438, 	throughput: 634 samples/sec
+Average loss at batch 27000: 6.507536, 	throughput: 633 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 20 epochs: 0.17640
+After 20 epochs: Precision: 0.44953, recall: 0.34874, F1: 0.39277
+Rouge:  {'rouge-1': {'f': 0.3890391203519909, 'p': 0.4467385226192485, 'r': 0.37110549379044183}, 'rouge-2': {'f': 0.10077342798754094, 'p': 0.10732049991612144, 'r': 0.0991925691598566}, 'rouge-l': {'f': 0.36542052383733603, 'p': 0.4450770284627867, 'r': 0.36973414616846484}}
+Saved after 20 epochs in: models/java-small-model/model_iter20
+Average loss at batch 27100: 6.456708, 	throughput: 423 samples/sec
+Average loss at batch 27200: 6.517993, 	throughput: 619 samples/sec
+Average loss at batch 27300: 6.478651, 	throughput: 664 samples/sec
+Average loss at batch 27400: 6.466278, 	throughput: 633 samples/sec
+Average loss at batch 27500: 6.561351, 	throughput: 630 samples/sec
+Average loss at batch 27600: 6.459090, 	throughput: 629 samples/sec
+Average loss at batch 27700: 6.499152, 	throughput: 624 samples/sec
+Average loss at batch 27800: 6.485497, 	throughput: 633 samples/sec
+Average loss at batch 27900: 6.453166, 	throughput: 632 samples/sec
+Average loss at batch 28000: 6.416815, 	throughput: 631 samples/sec
+Average loss at batch 28100: 6.421538, 	throughput: 632 samples/sec
+Average loss at batch 28200: 6.471963, 	throughput: 631 samples/sec
+Average loss at batch 28300: 6.485437, 	throughput: 628 samples/sec
+Average loss at batch 28400: 6.438460, 	throughput: 589 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 21 epochs: 0.19548
+After 21 epochs: Precision: 0.45780, recall: 0.35619, F1: 0.40066
+Rouge:  {'rouge-1': {'f': 0.4071225918000074, 'p': 0.4619247329866384, 'r': 0.39031103568093656}, 'rouge-2': {'f': 0.10122446881557508, 'p': 0.10760568696527428, 'r': 0.09984537389859485}, 'rouge-l': {'f': 0.3842194545161087, 'p': 0.4603310406531369, 'r': 0.3890627099232998}}
+Saved after 21 epochs in: models/java-small-model/model_iter21
+Average loss at batch 28500: 6.382315, 	throughput: 427 samples/sec
+Average loss at batch 28600: 6.484576, 	throughput: 669 samples/sec
+Average loss at batch 28700: 6.360100, 	throughput: 648 samples/sec
+Average loss at batch 28800: 6.469156, 	throughput: 642 samples/sec
+Average loss at batch 28900: 6.476351, 	throughput: 646 samples/sec
+Average loss at batch 29000: 6.383857, 	throughput: 654 samples/sec
+Average loss at batch 29100: 6.472126, 	throughput: 664 samples/sec
+Average loss at batch 29200: 6.406472, 	throughput: 662 samples/sec
+Average loss at batch 29300: 6.378823, 	throughput: 664 samples/sec
+Average loss at batch 29400: 6.366227, 	throughput: 672 samples/sec
+Average loss at batch 29500: 6.407423, 	throughput: 660 samples/sec
+Average loss at batch 29600: 6.414593, 	throughput: 670 samples/sec
+Average loss at batch 29700: 6.402069, 	throughput: 669 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 22 epochs: 0.19741
+After 22 epochs: Precision: 0.45715, recall: 0.35531, F1: 0.39985
+Rouge:  {'rouge-1': {'f': 0.40646485657086906, 'p': 0.46267404797853084, 'r': 0.3888996430138818}, 'rouge-2': {'f': 0.10144391772097869, 'p': 0.10772521389028686, 'r': 0.10003310206820527}, 'rouge-l': {'f': 0.38337892063060536, 'p': 0.4609091036179644, 'r': 0.38749569260074596}}
+Average loss at batch 29800: 6.350403, 	throughput: 434 samples/sec
+Average loss at batch 29900: 6.402154, 	throughput: 614 samples/sec
+Average loss at batch 30000: 6.360330, 	throughput: 667 samples/sec
+Average loss at batch 30100: 6.341657, 	throughput: 648 samples/sec
+Average loss at batch 30200: 6.440326, 	throughput: 650 samples/sec
+Average loss at batch 30300: 6.359820, 	throughput: 647 samples/sec
+Average loss at batch 30400: 6.407403, 	throughput: 650 samples/sec
+Average loss at batch 30500: 6.345610, 	throughput: 647 samples/sec
+Average loss at batch 30600: 6.354423, 	throughput: 652 samples/sec
+Average loss at batch 30700: 6.300059, 	throughput: 650 samples/sec
+Average loss at batch 30800: 6.316085, 	throughput: 649 samples/sec
+Average loss at batch 30900: 6.365556, 	throughput: 651 samples/sec
+Average loss at batch 31000: 6.387864, 	throughput: 647 samples/sec
+Average loss at batch 31100: 6.342994, 	throughput: 624 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 23 epochs: 0.19854
+After 23 epochs: Precision: 0.45546, recall: 0.35579, F1: 0.39950
+Rouge:  {'rouge-1': {'f': 0.4065539666939321, 'p': 0.4597229212100904, 'r': 0.3905682617025057}, 'rouge-2': {'f': 0.10310790522750815, 'p': 0.10949575015377737, 'r': 0.10166808461347975}, 'rouge-l': {'f': 0.3840618257728381, 'p': 0.4580802997259988, 'r': 0.3892520841942038}}
+Average loss at batch 31200: 6.266524, 	throughput: 423 samples/sec
+Average loss at batch 31300: 6.379658, 	throughput: 657 samples/sec
+Average loss at batch 31400: 6.269592, 	throughput: 658 samples/sec
+Average loss at batch 31500: 6.351691, 	throughput: 637 samples/sec
+Average loss at batch 31600: 6.387824, 	throughput: 638 samples/sec
+Average loss at batch 31700: 6.286741, 	throughput: 630 samples/sec
+Average loss at batch 31800: 6.374865, 	throughput: 633 samples/sec
+Average loss at batch 31900: 6.322358, 	throughput: 631 samples/sec
+Average loss at batch 32000: 6.265284, 	throughput: 629 samples/sec
+Average loss at batch 32100: 6.245456, 	throughput: 637 samples/sec
+Average loss at batch 32200: 6.330814, 	throughput: 633 samples/sec
+Average loss at batch 32300: 6.308590, 	throughput: 635 samples/sec
+Average loss at batch 32400: 6.291319, 	throughput: 634 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 24 epochs: 0.19707
+After 24 epochs: Precision: 0.45418, recall: 0.35464, F1: 0.39829
+Rouge:  {'rouge-1': {'f': 0.4046346731240792, 'p': 0.4583550019571688, 'r': 0.3881042961912319}, 'rouge-2': {'f': 0.10156667027322482, 'p': 0.10780280154336522, 'r': 0.10050067502256735}, 'rouge-l': {'f': 0.38225970918955315, 'p': 0.4567508248056834, 'r': 0.3868111852824942}}
+Average loss at batch 32500: 6.265547, 	throughput: 436 samples/sec
+Average loss at batch 32600: 6.288375, 	throughput: 599 samples/sec
+Average loss at batch 32700: 6.270584, 	throughput: 669 samples/sec
+Average loss at batch 32800: 6.232211, 	throughput: 639 samples/sec
+Average loss at batch 32900: 6.360844, 	throughput: 638 samples/sec
+Average loss at batch 33000: 6.273346, 	throughput: 635 samples/sec
+Average loss at batch 33100: 6.316964, 	throughput: 637 samples/sec
+Average loss at batch 33200: 6.252801, 	throughput: 636 samples/sec
+Average loss at batch 33300: 6.259651, 	throughput: 636 samples/sec
+Average loss at batch 33400: 6.221471, 	throughput: 638 samples/sec
+Average loss at batch 33500: 6.210204, 	throughput: 637 samples/sec
+Average loss at batch 33600: 6.295259, 	throughput: 635 samples/sec
+Average loss at batch 33700: 6.284136, 	throughput: 636 samples/sec
+Average loss at batch 33800: 6.257264, 	throughput: 635 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 25 epochs: 0.19779
+After 25 epochs: Precision: 0.45729, recall: 0.35858, F1: 0.40196
+Rouge:  {'rouge-1': {'f': 0.4085922515989101, 'p': 0.46113837163787086, 'r': 0.392708747128095}, 'rouge-2': {'f': 0.10287603793941466, 'p': 0.10924760946149976, 'r': 0.10154601137552831}, 'rouge-l': {'f': 0.38610407138684577, 'p': 0.4593524576413373, 'r': 0.39125773153201104}}
+Saved after 25 epochs in: models/java-small-model/model_iter25
+Average loss at batch 33900: 6.174056, 	throughput: 414 samples/sec
+Average loss at batch 34000: 6.272483, 	throughput: 663 samples/sec
+Average loss at batch 34100: 6.202376, 	throughput: 654 samples/sec
+Average loss at batch 34200: 6.266514, 	throughput: 636 samples/sec
+Average loss at batch 34300: 6.290373, 	throughput: 637 samples/sec
+Average loss at batch 34400: 6.190138, 	throughput: 633 samples/sec
+Average loss at batch 34500: 6.272047, 	throughput: 638 samples/sec
+Average loss at batch 34600: 6.232856, 	throughput: 637 samples/sec
+Average loss at batch 34700: 6.189457, 	throughput: 637 samples/sec
+Average loss at batch 34800: 6.161312, 	throughput: 636 samples/sec
+Average loss at batch 34900: 6.230277, 	throughput: 636 samples/sec
+Average loss at batch 35000: 6.234869, 	throughput: 635 samples/sec
+Average loss at batch 35100: 6.202317, 	throughput: 637 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 26 epochs: 0.19980
+After 26 epochs: Precision: 0.45689, recall: 0.35429, F1: 0.39910
+Rouge:  {'rouge-1': {'f': 0.40583891842289455, 'p': 0.45956215400100875, 'r': 0.3896377757128854}, 'rouge-2': {'f': 0.10263332877827153, 'p': 0.10909592909467096, 'r': 0.10124334962973618}, 'rouge-l': {'f': 0.3832537958459039, 'p': 0.4578866800872353, 'r': 0.3882580568790895}}
+Average loss at batch 35200: 6.178351, 	throughput: 434 samples/sec
+Average loss at batch 35300: 6.210789, 	throughput: 593 samples/sec
+Average loss at batch 35400: 6.186671, 	throughput: 672 samples/sec
+Average loss at batch 35500: 6.154764, 	throughput: 640 samples/sec
+Average loss at batch 35600: 6.267396, 	throughput: 637 samples/sec
+Average loss at batch 35700: 6.188272, 	throughput: 636 samples/sec
+Average loss at batch 35800: 6.210177, 	throughput: 637 samples/sec
+Average loss at batch 35900: 6.176557, 	throughput: 636 samples/sec
+Average loss at batch 36000: 6.172801, 	throughput: 635 samples/sec
+Average loss at batch 36100: 6.142154, 	throughput: 632 samples/sec
+Average loss at batch 36200: 6.123022, 	throughput: 637 samples/sec
+Average loss at batch 36300: 6.201286, 	throughput: 635 samples/sec
+Average loss at batch 36400: 6.188290, 	throughput: 633 samples/sec
+Average loss at batch 36500: 6.193571, 	throughput: 636 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 27 epochs: 0.20055
+After 27 epochs: Precision: 0.45464, recall: 0.35739, F1: 0.40019
+Rouge:  {'rouge-1': {'f': 0.4078873057074173, 'p': 0.46048971089862223, 'r': 0.3917264513106205}, 'rouge-2': {'f': 0.10267040842159197, 'p': 0.10920846614102779, 'r': 0.10120535464647194}, 'rouge-l': {'f': 0.3857819021584202, 'p': 0.4588177319241769, 'r': 0.3903728280238062}}
+Average loss at batch 36600: 6.089475, 	throughput: 413 samples/sec
+Average loss at batch 36700: 6.186663, 	throughput: 655 samples/sec
+Average loss at batch 36800: 6.138926, 	throughput: 662 samples/sec
+Average loss at batch 36900: 6.183595, 	throughput: 641 samples/sec
+Average loss at batch 37000: 6.197219, 	throughput: 639 samples/sec
+Average loss at batch 37100: 6.117859, 	throughput: 642 samples/sec
+Average loss at batch 37200: 6.192045, 	throughput: 640 samples/sec
+Average loss at batch 37300: 6.142956, 	throughput: 640 samples/sec
+Average loss at batch 37400: 6.125459, 	throughput: 642 samples/sec
+Average loss at batch 37500: 6.079496, 	throughput: 641 samples/sec
+Average loss at batch 37600: 6.143927, 	throughput: 640 samples/sec
+Average loss at batch 37700: 6.161841, 	throughput: 642 samples/sec
+Average loss at batch 37800: 6.134786, 	throughput: 641 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 28 epochs: 0.20122
+After 28 epochs: Precision: 0.45877, recall: 0.35825, F1: 0.40233
+Rouge:  {'rouge-1': {'f': 0.40915155688729354, 'p': 0.4635799362523086, 'r': 0.3925136281452302}, 'rouge-2': {'f': 0.10300422807759564, 'p': 0.10902533132024829, 'r': 0.10187568400955424}, 'rouge-l': {'f': 0.38647469471566137, 'p': 0.46187650282391257, 'r': 0.3910912710516349}}
+Saved after 28 epochs in: models/java-small-model/model_iter28
+Average loss at batch 37900: 6.099815, 	throughput: 438 samples/sec
+Average loss at batch 38000: 6.132501, 	throughput: 594 samples/sec
+Average loss at batch 38100: 6.139139, 	throughput: 668 samples/sec
+Average loss at batch 38200: 6.067232, 	throughput: 659 samples/sec
+Average loss at batch 38300: 6.197490, 	throughput: 651 samples/sec
+Average loss at batch 38400: 6.120228, 	throughput: 648 samples/sec
+Average loss at batch 38500: 6.123243, 	throughput: 650 samples/sec
+Average loss at batch 38600: 6.123658, 	throughput: 650 samples/sec
+Average loss at batch 38700: 6.100090, 	throughput: 654 samples/sec
+Average loss at batch 38800: 6.079727, 	throughput: 649 samples/sec
+Average loss at batch 38900: 6.060130, 	throughput: 649 samples/sec
+Average loss at batch 39000: 6.121616, 	throughput: 648 samples/sec
+Average loss at batch 39100: 6.131300, 	throughput: 651 samples/sec
+Average loss at batch 39200: 6.124850, 	throughput: 651 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 29 epochs: 0.19946
+After 29 epochs: Precision: 0.45484, recall: 0.35642, F1: 0.39966
+Rouge:  {'rouge-1': {'f': 0.40705488495741593, 'p': 0.46016188558966853, 'r': 0.3911133390971051}, 'rouge-2': {'f': 0.10369415633142995, 'p': 0.11020382486160041, 'r': 0.10218668368202848}, 'rouge-l': {'f': 0.38467299301376706, 'p': 0.45857378515909153, 'r': 0.38976227876579744}}
+Average loss at batch 39300: 6.012828, 	throughput: 418 samples/sec
+Average loss at batch 39400: 6.121323, 	throughput: 641 samples/sec
+Average loss at batch 39500: 6.061733, 	throughput: 657 samples/sec
+Average loss at batch 39600: 6.111250, 	throughput: 636 samples/sec
+Average loss at batch 39700: 6.137830, 	throughput: 637 samples/sec
+Average loss at batch 39800: 6.055482, 	throughput: 636 samples/sec
+Average loss at batch 39900: 6.128386, 	throughput: 634 samples/sec
+Average loss at batch 40000: 6.061981, 	throughput: 641 samples/sec
+Average loss at batch 40100: 6.082521, 	throughput: 635 samples/sec
+Average loss at batch 40200: 6.015788, 	throughput: 634 samples/sec
+Average loss at batch 40300: 6.078368, 	throughput: 633 samples/sec
+Average loss at batch 40400: 6.083728, 	throughput: 633 samples/sec
+Average loss at batch 40500: 6.070610, 	throughput: 630 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 30 epochs: 0.20114
+After 30 epochs: Precision: 0.45489, recall: 0.35851, F1: 0.40099
+Rouge:  {'rouge-1': {'f': 0.4082484554884057, 'p': 0.4598843874070381, 'r': 0.3930577402708727}, 'rouge-2': {'f': 0.10374082511529566, 'p': 0.10967539003522898, 'r': 0.10273239349422042}, 'rouge-l': {'f': 0.3860511525827799, 'p': 0.45813551976737954, 'r': 0.3915789981561212}}
+Average loss at batch 40600: 6.002718, 	throughput: 438 samples/sec
+Average loss at batch 40700: 6.071435, 	throughput: 579 samples/sec
+Average loss at batch 40800: 6.079865, 	throughput: 672 samples/sec
+Average loss at batch 40900: 6.002347, 	throughput: 644 samples/sec
+Average loss at batch 41000: 6.122761, 	throughput: 638 samples/sec
+Average loss at batch 41100: 6.070328, 	throughput: 636 samples/sec
+Average loss at batch 41200: 6.069810, 	throughput: 639 samples/sec
+Average loss at batch 41300: 6.050469, 	throughput: 639 samples/sec
+Average loss at batch 41400: 6.036495, 	throughput: 636 samples/sec
+Average loss at batch 41500: 5.992587, 	throughput: 636 samples/sec
+Average loss at batch 41600: 6.011436, 	throughput: 637 samples/sec
+Average loss at batch 41700: 6.051153, 	throughput: 638 samples/sec
+Average loss at batch 41800: 6.068418, 	throughput: 637 samples/sec
+Average loss at batch 41900: 6.059661, 	throughput: 639 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 31 epochs: 0.20127
+After 31 epochs: Precision: 0.45700, recall: 0.35865, F1: 0.40189
+Rouge:  {'rouge-1': {'f': 0.4093430402115921, 'p': 0.4613704356092407, 'r': 0.39343732396701436}, 'rouge-2': {'f': 0.10388125510738536, 'p': 0.10999203153833252, 'r': 0.10268546145181787}, 'rouge-l': {'f': 0.38728024293294655, 'p': 0.4596949616954676, 'r': 0.39199609420104864}}
+Average loss at batch 42000: 5.964634, 	throughput: 415 samples/sec
+Average loss at batch 42100: 6.055467, 	throughput: 647 samples/sec
+Average loss at batch 42200: 5.985074, 	throughput: 666 samples/sec
+Average loss at batch 42300: 6.079799, 	throughput: 642 samples/sec
+Average loss at batch 42400: 6.069867, 	throughput: 637 samples/sec
+Average loss at batch 42500: 5.969890, 	throughput: 637 samples/sec
+Average loss at batch 42600: 6.068467, 	throughput: 640 samples/sec
+Average loss at batch 42700: 5.996152, 	throughput: 638 samples/sec
+Average loss at batch 42800: 6.023593, 	throughput: 642 samples/sec
+Average loss at batch 42900: 5.962654, 	throughput: 639 samples/sec
+Average loss at batch 43000: 5.988687, 	throughput: 641 samples/sec
+Average loss at batch 43100: 6.042414, 	throughput: 640 samples/sec
+Average loss at batch 43200: 6.017388, 	throughput: 639 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 32 epochs: 0.20194
+After 32 epochs: Precision: 0.45372, recall: 0.35801, F1: 0.40022
+Rouge:  {'rouge-1': {'f': 0.40831353397721754, 'p': 0.45954607728010144, 'r': 0.392855250143245}, 'rouge-2': {'f': 0.10457342254244895, 'p': 0.11068752446457529, 'r': 0.1034517019355973}, 'rouge-l': {'f': 0.3863569807543362, 'p': 0.45782516915506605, 'r': 0.39138431339299234}}
+Average loss at batch 43300: 5.938599, 	throughput: 448 samples/sec
+Average loss at batch 43400: 6.011616, 	throughput: 570 samples/sec
+Average loss at batch 43500: 6.038338, 	throughput: 664 samples/sec
+Average loss at batch 43600: 5.930090, 	throughput: 651 samples/sec
+Average loss at batch 43700: 6.069591, 	throughput: 639 samples/sec
+Average loss at batch 43800: 6.025975, 	throughput: 637 samples/sec
+Average loss at batch 43900: 5.985342, 	throughput: 636 samples/sec
+Average loss at batch 44000: 6.008305, 	throughput: 637 samples/sec
+Average loss at batch 44100: 5.976174, 	throughput: 634 samples/sec
+Average loss at batch 44200: 5.949394, 	throughput: 638 samples/sec
+Average loss at batch 44300: 5.941601, 	throughput: 639 samples/sec
+Average loss at batch 44400: 5.980922, 	throughput: 634 samples/sec
+Average loss at batch 44500: 5.990559, 	throughput: 634 samples/sec
+Average loss at batch 44600: 5.996975, 	throughput: 632 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 33 epochs: 0.20202
+After 33 epochs: Precision: 0.45552, recall: 0.35892, F1: 0.40149
+Rouge:  {'rouge-1': {'f': 0.4093557672495331, 'p': 0.4620463568752472, 'r': 0.3935697821675401}, 'rouge-2': {'f': 0.10441864665789252, 'p': 0.11047782810490413, 'r': 0.10335529153785322}, 'rouge-l': {'f': 0.3868928933548896, 'p': 0.4602450651456711, 'r': 0.3920306941003946}}
+Average loss at batch 44700: 5.928374, 	throughput: 418 samples/sec
+Average loss at batch 44800: 6.007656, 	throughput: 636 samples/sec
+Average loss at batch 44900: 5.958196, 	throughput: 660 samples/sec
+Average loss at batch 45000: 5.987653, 	throughput: 639 samples/sec
+Average loss at batch 45100: 6.040116, 	throughput: 634 samples/sec
+Average loss at batch 45200: 5.931441, 	throughput: 638 samples/sec
+Average loss at batch 45300: 5.996316, 	throughput: 634 samples/sec
+Average loss at batch 45400: 5.968125, 	throughput: 635 samples/sec
+Average loss at batch 45500: 5.945071, 	throughput: 636 samples/sec
+Average loss at batch 45600: 5.910631, 	throughput: 635 samples/sec
+Average loss at batch 45700: 5.927791, 	throughput: 634 samples/sec
+Average loss at batch 45800: 5.990522, 	throughput: 638 samples/sec
+Average loss at batch 45900: 5.948744, 	throughput: 636 samples/sec
+Average loss at batch 46000: 5.949621, 	throughput: 572 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 34 epochs: 0.20273
+After 34 epochs: Precision: 0.45146, recall: 0.35608, F1: 0.39814
+Rouge:  {'rouge-1': {'f': 0.406068560482871, 'p': 0.4566886148856483, 'r': 0.3913651910820979}, 'rouge-2': {'f': 0.10455994206542521, 'p': 0.11009338477884027, 'r': 0.10364771810418517}, 'rouge-l': {'f': 0.3841670714714168, 'p': 0.45488382821674406, 'r': 0.38979744451246334}}
+Average loss at batch 46100: 5.902975, 	throughput: 443 samples/sec
+Average loss at batch 46200: 5.968673, 	throughput: 676 samples/sec
+Average loss at batch 46300: 5.881312, 	throughput: 669 samples/sec
+Average loss at batch 46400: 6.002064, 	throughput: 653 samples/sec
+Average loss at batch 46500: 5.982765, 	throughput: 650 samples/sec
+Average loss at batch 46600: 5.957329, 	throughput: 648 samples/sec
+Average loss at batch 46700: 5.937907, 	throughput: 647 samples/sec
+Average loss at batch 46800: 5.912950, 	throughput: 643 samples/sec
+Average loss at batch 46900: 5.901947, 	throughput: 650 samples/sec
+Average loss at batch 47000: 5.873155, 	throughput: 650 samples/sec
+Average loss at batch 47100: 5.956565, 	throughput: 647 samples/sec
+Average loss at batch 47200: 5.930771, 	throughput: 652 samples/sec
+Average loss at batch 47300: 5.941973, 	throughput: 650 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 35 epochs: 0.20227
+After 35 epochs: Precision: 0.45676, recall: 0.35833, F1: 0.40160
+Rouge:  {'rouge-1': {'f': 0.4091098808816415, 'p': 0.46320527875636414, 'r': 0.3928250771670478}, 'rouge-2': {'f': 0.10471112012566394, 'p': 0.11084619471005983, 'r': 0.10365830277757812}, 'rouge-l': {'f': 0.3863392067368281, 'p': 0.461403987026788, 'r': 0.39132233646891196}}
+Average loss at batch 47400: 5.874470, 	throughput: 425 samples/sec
+Average loss at batch 47500: 5.950816, 	throughput: 626 samples/sec
+Average loss at batch 47600: 5.898219, 	throughput: 666 samples/sec
+Average loss at batch 47700: 5.917133, 	throughput: 644 samples/sec
+Average loss at batch 47800: 6.005088, 	throughput: 644 samples/sec
+Average loss at batch 47900: 5.887107, 	throughput: 640 samples/sec
+Average loss at batch 48000: 5.934270, 	throughput: 638 samples/sec
+Average loss at batch 48100: 5.910073, 	throughput: 642 samples/sec
+Average loss at batch 48200: 5.894886, 	throughput: 642 samples/sec
+Average loss at batch 48300: 5.871581, 	throughput: 639 samples/sec
+Average loss at batch 48400: 5.866258, 	throughput: 638 samples/sec
+Average loss at batch 48500: 5.928183, 	throughput: 640 samples/sec
+Average loss at batch 48600: 5.922947, 	throughput: 635 samples/sec
+Average loss at batch 48700: 5.895851, 	throughput: 584 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 36 epochs: 0.20307
+After 36 epochs: Precision: 0.45203, recall: 0.35894, F1: 0.40014
+Rouge:  {'rouge-1': {'f': 0.4086691505111857, 'p': 0.46020522283733534, 'r': 0.39353396736071317}, 'rouge-2': {'f': 0.10475375838746492, 'p': 0.11061762567801822, 'r': 0.10366704012589772}, 'rouge-l': {'f': 0.3866198391829509, 'p': 0.4584703349549884, 'r': 0.39207526289810807}}
+Average loss at batch 48800: 5.842550, 	throughput: 445 samples/sec
+Average loss at batch 48900: 5.953207, 	throughput: 673 samples/sec
+Average loss at batch 49000: 5.822120, 	throughput: 647 samples/sec
+Average loss at batch 49100: 5.932332, 	throughput: 634 samples/sec
+Average loss at batch 49200: 5.946594, 	throughput: 639 samples/sec
+Average loss at batch 49300: 5.896768, 	throughput: 635 samples/sec
+Average loss at batch 49400: 5.927350, 	throughput: 635 samples/sec
+Average loss at batch 49500: 5.879964, 	throughput: 639 samples/sec
+Average loss at batch 49600: 5.856423, 	throughput: 635 samples/sec
+Average loss at batch 49700: 5.837985, 	throughput: 634 samples/sec
+Average loss at batch 49800: 5.895858, 	throughput: 637 samples/sec
+Average loss at batch 49900: 5.905014, 	throughput: 635 samples/sec
+Average loss at batch 50000: 5.867252, 	throughput: 637 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 37 epochs: 0.20403
+After 37 epochs: Precision: 0.45650, recall: 0.36073, F1: 0.40300
+Rouge:  {'rouge-1': {'f': 0.4107647554619058, 'p': 0.46278309008555973, 'r': 0.39538313975908035}, 'rouge-2': {'f': 0.10614647808250545, 'p': 0.1121973382542079, 'r': 0.10514405141355324}, 'rouge-l': {'f': 0.388556674077609, 'p': 0.46103422244590153, 'r': 0.3939223383328789}}
+Saved after 37 epochs in: models/java-small-model/model_iter37
+Average loss at batch 50100: 5.839318, 	throughput: 425 samples/sec
+Average loss at batch 50200: 5.910579, 	throughput: 623 samples/sec
+Average loss at batch 50300: 5.847109, 	throughput: 675 samples/sec
+Average loss at batch 50400: 5.872380, 	throughput: 659 samples/sec
+Average loss at batch 50500: 5.954687, 	throughput: 652 samples/sec
+Average loss at batch 50600: 5.855888, 	throughput: 649 samples/sec
+Average loss at batch 50700: 5.893902, 	throughput: 652 samples/sec
+Average loss at batch 50800: 5.872276, 	throughput: 651 samples/sec
+Average loss at batch 50900: 5.859519, 	throughput: 647 samples/sec
+Average loss at batch 51000: 5.824584, 	throughput: 647 samples/sec
+Average loss at batch 51100: 5.822345, 	throughput: 653 samples/sec
+Average loss at batch 51200: 5.880065, 	throughput: 650 samples/sec
+Average loss at batch 51300: 5.894215, 	throughput: 651 samples/sec
+Average loss at batch 51400: 5.848273, 	throughput: 604 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 38 epochs: 0.20169
+After 38 epochs: Precision: 0.45437, recall: 0.36031, F1: 0.40191
+Rouge:  {'rouge-1': {'f': 0.4097805018679539, 'p': 0.46117471900688173, 'r': 0.39495820506451834}, 'rouge-2': {'f': 0.10512468794308666, 'p': 0.11113837163786838, 'r': 0.10402212596160763}, 'rouge-l': {'f': 0.38752702996809785, 'p': 0.45936643739864996, 'r': 0.3934473095079507}}
+Average loss at batch 51500: 5.813544, 	throughput: 427 samples/sec
+Average loss at batch 51600: 5.894928, 	throughput: 663 samples/sec
+Average loss at batch 51700: 5.793499, 	throughput: 653 samples/sec
+Average loss at batch 51800: 5.890508, 	throughput: 639 samples/sec
+Average loss at batch 51900: 5.904545, 	throughput: 637 samples/sec
+Average loss at batch 52000: 5.826215, 	throughput: 637 samples/sec
+Average loss at batch 52100: 5.905160, 	throughput: 636 samples/sec
+Average loss at batch 52200: 5.830180, 	throughput: 637 samples/sec
+Average loss at batch 52300: 5.817558, 	throughput: 634 samples/sec
+Average loss at batch 52400: 5.803448, 	throughput: 638 samples/sec
+Average loss at batch 52500: 5.852159, 	throughput: 638 samples/sec
+Average loss at batch 52600: 5.853640, 	throughput: 635 samples/sec
+Average loss at batch 52700: 5.826330, 	throughput: 634 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 39 epochs: 0.20269
+After 39 epochs: Precision: 0.45077, recall: 0.35873, F1: 0.39952
+Rouge:  {'rouge-1': {'f': 0.40772331891562325, 'p': 0.45678088128390404, 'r': 0.3936559588987843}, 'rouge-2': {'f': 0.1062176053922431, 'p': 0.1121064698316837, 'r': 0.10521739521173346}, 'rouge-l': {'f': 0.3861760189906, 'p': 0.4550669630375238, 'r': 0.39220564229056615}}
+Average loss at batch 52800: 5.808312, 	throughput: 434 samples/sec
+Average loss at batch 52900: 5.858422, 	throughput: 604 samples/sec
+Average loss at batch 53000: 5.804071, 	throughput: 670 samples/sec
+Average loss at batch 53100: 5.803476, 	throughput: 637 samples/sec
+Average loss at batch 53200: 5.906042, 	throughput: 641 samples/sec
+Average loss at batch 53300: 5.824151, 	throughput: 641 samples/sec
+Average loss at batch 53400: 5.876450, 	throughput: 638 samples/sec
+Average loss at batch 53500: 5.809259, 	throughput: 637 samples/sec
+Average loss at batch 53600: 5.818412, 	throughput: 639 samples/sec
+Average loss at batch 53700: 5.763052, 	throughput: 639 samples/sec
+Average loss at batch 53800: 5.789819, 	throughput: 639 samples/sec
+Average loss at batch 53900: 5.833603, 	throughput: 639 samples/sec
+Average loss at batch 54000: 5.857561, 	throughput: 638 samples/sec
+Average loss at batch 54100: 5.818884, 	throughput: 616 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 40 epochs: 0.20382
+After 40 epochs: Precision: 0.45249, recall: 0.35884, F1: 0.40026
+Rouge:  {'rouge-1': {'f': 0.4087494603405183, 'p': 0.4591469552088607, 'r': 0.3941107322052184}, 'rouge-2': {'f': 0.10647423076784521, 'p': 0.11262931275513055, 'r': 0.10546348886811899}, 'rouge-l': {'f': 0.38678941717762916, 'p': 0.45734216853995635, 'r': 0.39262406822799073}}
+Average loss at batch 54200: 5.754757, 	throughput: 425 samples/sec
+Average loss at batch 54300: 5.870282, 	throughput: 664 samples/sec
+Average loss at batch 54400: 5.758299, 	throughput: 648 samples/sec
+Average loss at batch 54500: 5.857098, 	throughput: 640 samples/sec
+Average loss at batch 54600: 5.863121, 	throughput: 638 samples/sec
+Average loss at batch 54700: 5.771955, 	throughput: 634 samples/sec
+Average loss at batch 54800: 5.870633, 	throughput: 638 samples/sec
+Average loss at batch 54900: 5.812619, 	throughput: 634 samples/sec
+Average loss at batch 55000: 5.770384, 	throughput: 631 samples/sec
+Average loss at batch 55100: 5.749321, 	throughput: 634 samples/sec
+Average loss at batch 55200: 5.823539, 	throughput: 632 samples/sec
+Average loss at batch 55300: 5.817058, 	throughput: 635 samples/sec
+Average loss at batch 55400: 5.790679, 	throughput: 634 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 41 epochs: 0.20357
+After 41 epochs: Precision: 0.45109, recall: 0.35982, F1: 0.40032
+Rouge:  {'rouge-1': {'f': 0.40882970473830177, 'p': 0.4579237264441119, 'r': 0.3945860273112385}, 'rouge-2': {'f': 0.1064568589528734, 'p': 0.1121553989822737, 'r': 0.10554731748428285}, 'rouge-l': {'f': 0.3873304642415428, 'p': 0.45608399038192926, 'r': 0.39307030540988486}}
+Average loss at batch 55500: 5.777109, 	throughput: 435 samples/sec
+Average loss at batch 55600: 5.802686, 	throughput: 596 samples/sec
+Average loss at batch 55700: 5.786573, 	throughput: 666 samples/sec
+Average loss at batch 55800: 5.766103, 	throughput: 639 samples/sec
+Average loss at batch 55900: 5.864662, 	throughput: 635 samples/sec
+Average loss at batch 56000: 5.780167, 	throughput: 636 samples/sec
+Average loss at batch 56100: 5.843504, 	throughput: 633 samples/sec
+Average loss at batch 56200: 5.762838, 	throughput: 635 samples/sec
+Average loss at batch 56300: 5.795842, 	throughput: 634 samples/sec
+Average loss at batch 56400: 5.742892, 	throughput: 635 samples/sec
+Average loss at batch 56500: 5.733049, 	throughput: 635 samples/sec
+Average loss at batch 56600: 5.815219, 	throughput: 636 samples/sec
+Average loss at batch 56700: 5.807525, 	throughput: 635 samples/sec
+Average loss at batch 56800: 5.798988, 	throughput: 636 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 42 epochs: 0.20349
+After 42 epochs: Precision: 0.45134, recall: 0.35890, F1: 0.39985
+Rouge:  {'rouge-1': {'f': 0.40833908485892906, 'p': 0.4579516859587345, 'r': 0.39412116709549766}, 'rouge-2': {'f': 0.10691116777999114, 'p': 0.1128459989934575, 'r': 0.10592826587101883}, 'rouge-l': {'f': 0.386660662046897, 'p': 0.45618883856176434, 'r': 0.39265547275423707}}
+Average loss at batch 56900: 5.721508, 	throughput: 417 samples/sec
+Average loss at batch 57000: 5.821040, 	throughput: 662 samples/sec
+Average loss at batch 57100: 5.735091, 	throughput: 672 samples/sec
+Average loss at batch 57200: 5.815713, 	throughput: 650 samples/sec
+Average loss at batch 57300: 5.839452, 	throughput: 648 samples/sec
+Average loss at batch 57400: 5.758783, 	throughput: 648 samples/sec
+Average loss at batch 57500: 5.819692, 	throughput: 653 samples/sec
+Average loss at batch 57600: 5.780490, 	throughput: 649 samples/sec
+Average loss at batch 57700: 5.751658, 	throughput: 652 samples/sec
+Average loss at batch 57800: 5.713534, 	throughput: 650 samples/sec
+Average loss at batch 57900: 5.781846, 	throughput: 651 samples/sec
+Average loss at batch 58000: 5.790489, 	throughput: 651 samples/sec
+Average loss at batch 58100: 5.764513, 	throughput: 649 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 43 epochs: 0.20194
+After 43 epochs: Precision: 0.45122, recall: 0.35931, F1: 0.40005
+Rouge:  {'rouge-1': {'f': 0.40797797743392017, 'p': 0.4572890454621747, 'r': 0.3937876833133474}, 'rouge-2': {'f': 0.10528026266963976, 'p': 0.11096012973214787, 'r': 0.10436532900360283}, 'rouge-l': {'f': 0.3863497983256502, 'p': 0.45548775373259814, 'r': 0.3922674679185722}}
+Average loss at batch 58200: 5.740740, 	throughput: 438 samples/sec
+Average loss at batch 58300: 5.778423, 	throughput: 596 samples/sec
+Average loss at batch 58400: 5.760551, 	throughput: 673 samples/sec
+Average loss at batch 58500: 5.718597, 	throughput: 645 samples/sec
+Average loss at batch 58600: 5.837353, 	throughput: 638 samples/sec
+Average loss at batch 58700: 5.751706, 	throughput: 638 samples/sec
+Average loss at batch 58800: 5.796570, 	throughput: 638 samples/sec
+Average loss at batch 58900: 5.748606, 	throughput: 636 samples/sec
+Average loss at batch 59000: 5.769923, 	throughput: 637 samples/sec
+Average loss at batch 59100: 5.717999, 	throughput: 637 samples/sec
+Average loss at batch 59200: 5.689228, 	throughput: 633 samples/sec
+Average loss at batch 59300: 5.777963, 	throughput: 633 samples/sec
+Average loss at batch 59400: 5.771057, 	throughput: 633 samples/sec
+Average loss at batch 59500: 5.769626, 	throughput: 637 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m20s
+Accuracy after 44 epochs: 0.20320
+After 44 epochs: Precision: 0.45156, recall: 0.36081, F1: 0.40111
+Rouge:  {'rouge-1': {'f': 0.40924608363854936, 'p': 0.45848501370016675, 'r': 0.3950486907079733}, 'rouge-2': {'f': 0.10661172863899375, 'p': 0.11245246882514119, 'r': 0.10562565405293141}, 'rouge-l': {'f': 0.3875871746547356, 'p': 0.4566977017279016, 'r': 0.3935644232605703}}
+Average loss at batch 59600: 5.687528, 	throughput: 416 samples/sec
+Average loss at batch 59700: 5.772559, 	throughput: 648 samples/sec
+Average loss at batch 59800: 5.707484, 	throughput: 661 samples/sec
+Average loss at batch 59900: 5.796149, 	throughput: 644 samples/sec
+Average loss at batch 60000: 5.801921, 	throughput: 639 samples/sec
+Average loss at batch 60100: 5.728770, 	throughput: 639 samples/sec
+Average loss at batch 60200: 5.784740, 	throughput: 643 samples/sec
+Average loss at batch 60300: 5.743404, 	throughput: 640 samples/sec
+Average loss at batch 60400: 5.734527, 	throughput: 640 samples/sec
+Average loss at batch 60500: 5.690169, 	throughput: 642 samples/sec
+Average loss at batch 60600: 5.748417, 	throughput: 641 samples/sec
+Average loss at batch 60700: 5.767497, 	throughput: 641 samples/sec
+Average loss at batch 60800: 5.732892, 	throughput: 643 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 45 epochs: 0.20118
+After 45 epochs: Precision: 0.44750, recall: 0.36011, F1: 0.39908
+Rouge:  {'rouge-1': {'f': 0.40718017508175897, 'p': 0.45424774925907524, 'r': 0.3944123953969168}, 'rouge-2': {'f': 0.10663882576535111, 'p': 0.11247483643683942, 'r': 0.10585731860266338}, 'rouge-l': {'f': 0.38579863646720847, 'p': 0.45239263546384956, 'r': 0.39285093971807317}}
+Average loss at batch 60900: 5.711736, 	throughput: 441 samples/sec
+Average loss at batch 61000: 5.742094, 	throughput: 586 samples/sec
+Average loss at batch 61100: 5.758626, 	throughput: 672 samples/sec
+Average loss at batch 61200: 5.682297, 	throughput: 641 samples/sec
+Average loss at batch 61300: 5.811393, 	throughput: 634 samples/sec
+Average loss at batch 61400: 5.745800, 	throughput: 630 samples/sec
+Average loss at batch 61500: 5.757188, 	throughput: 637 samples/sec
+Average loss at batch 61600: 5.723730, 	throughput: 635 samples/sec
+Average loss at batch 61700: 5.743534, 	throughput: 634 samples/sec
+Average loss at batch 61800: 5.676866, 	throughput: 636 samples/sec
+Average loss at batch 61900: 5.685136, 	throughput: 636 samples/sec
+Average loss at batch 62000: 5.732078, 	throughput: 634 samples/sec
+Average loss at batch 62100: 5.758703, 	throughput: 636 samples/sec
+Average loss at batch 62200: 5.739694, 	throughput: 635 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 46 epochs: 0.20366
+After 46 epochs: Precision: 0.44802, recall: 0.35679, F1: 0.39724
+Rouge:  {'rouge-1': {'f': 0.4062667008490279, 'p': 0.4554639881451691, 'r': 0.3919730608866212}, 'rouge-2': {'f': 0.10595654704549794, 'p': 0.11169266901526592, 'r': 0.10495422628034612}, 'rouge-l': {'f': 0.38477892685394155, 'p': 0.4536123692892716, 'r': 0.39042209002576017}}
+Average loss at batch 62300: 5.649462, 	throughput: 420 samples/sec
+Average loss at batch 62400: 5.760079, 	throughput: 646 samples/sec
+Average loss at batch 62500: 5.689912, 	throughput: 673 samples/sec
+Average loss at batch 62600: 5.756865, 	throughput: 655 samples/sec
+Average loss at batch 62700: 5.775843, 	throughput: 652 samples/sec
+Average loss at batch 62800: 5.690120, 	throughput: 652 samples/sec
+Average loss at batch 62900: 5.756168, 	throughput: 651 samples/sec
+Average loss at batch 63000: 5.698167, 	throughput: 654 samples/sec
+Average loss at batch 63100: 5.725879, 	throughput: 651 samples/sec
+Average loss at batch 63200: 5.657288, 	throughput: 650 samples/sec
+Average loss at batch 63300: 5.713033, 	throughput: 649 samples/sec
+Average loss at batch 63400: 5.720562, 	throughput: 650 samples/sec
+Average loss at batch 63500: 5.712966, 	throughput: 645 samples/sec
+Finished 1 epochs
+Done testing, epoch reached
+Evaluation time: 0h0m19s
+Accuracy after 47 epochs: 0.20332
+After 47 epochs: Precision: 0.45068, recall: 0.36073, F1: 0.40072
+Rouge:  {'rouge-1': {'f': 0.4094875945295504, 'p': 0.45899038192697444, 'r': 0.3954692650496598}, 'rouge-2': {'f': 0.10575430958216887, 'p': 0.11134457305821169, 'r': 0.10482980644027454}, 'rouge-l': {'f': 0.38772674112235117, 'p': 0.45715763574344725, 'r': 0.39393716686116986}}
+Not improved for 10 epochs, stopping training
+Best scores - epoch 37: 
+Precision: 0.45650, recall: 0.36073, F1: 0.40300

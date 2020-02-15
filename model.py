@@ -301,6 +301,7 @@ class Model:
         print('Max target length:\t\t\t', self.config.MAX_TARGET_PARTS)
         print('Embeddings dropout keep_prob:\t\t', self.config.EMBEDDINGS_DROPOUT_KEEP_PROB)
         print('LSTM dropout keep_prob:\t\t\t', self.config.RNN_DROPOUT_KEEP_PROB)
+        print('Lasso coefficient:\t\t\t', self.config.LASSO)
         print('============================================')
 
     @staticmethod
@@ -357,6 +358,9 @@ class Model:
                                           initializer=tf.contrib.layers.variance_scaling_initializer(factor=1.0,
                                                                                                      mode='FAN_OUT',
                                                                                                      uniform=True))
+            nodes_lasso = tf.reduce_sum(nodes_vocab)
+            subtoken_lasso = tf.reduce_sum(subtoken_vocab)
+
             # (batch, max_contexts, decoder_size)
             batched_contexts = self.compute_contexts(subtoken_vocab=subtoken_vocab, nodes_vocab=nodes_vocab,
                                                      source_input=path_source_indices, nodes_input=node_indices,
@@ -377,7 +381,9 @@ class Model:
             crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=target_index, logits=logits)
             target_words_nonzero = tf.sequence_mask(target_lengths + 1,
                                                     maxlen=self.config.MAX_TARGET_PARTS + 1, dtype=tf.float32)
-            loss = tf.reduce_sum(crossent * target_words_nonzero) / tf.to_float(batch_size)
+
+            loss = tf.reduce_sum(crossent * target_words_nonzero) / tf.to_float(batch_size) + \
+                                                                self.config.LASSO * (nodes_lasso + subtoken_lasso)
 
             if self.config.USE_MOMENTUM:
                 learning_rate = tf.train.exponential_decay(0.01, step * self.config.BATCH_SIZE,
