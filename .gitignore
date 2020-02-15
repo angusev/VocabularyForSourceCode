@@ -6,3 +6,4 @@
 *.pyc
 data/
 models/
+slurm/
