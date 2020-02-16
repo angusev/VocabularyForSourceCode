@@ -24,7 +24,7 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action='store_true')
     parser.add_argument('--seed', type=int, default=239)
 
-    parser.add_argument('--lasso', action='store', nargs=1, default=0, type=float, help='L1-regularisation on embeddings layer coefficient')
+    parser.add_argument('--lasso', action='store', default=0, type=float, help='L1-regularisation on embeddings layer coefficient')
 
     args = parser.parse_args()
 

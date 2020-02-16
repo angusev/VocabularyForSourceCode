@@ -26,7 +26,6 @@ class Config:
         config.RANDOM_CONTEXTS = True
         config.BEAM_WIDTH = 0
         config.USE_MOMENTUM = True
-        config.LASSO = 0
         return config
 
     def take_model_hyperparams_from(self, otherConfig):

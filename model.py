@@ -358,8 +358,13 @@ class Model:
                                           initializer=tf.contrib.layers.variance_scaling_initializer(factor=1.0,
                                                                                                      mode='FAN_OUT',
                                                                                                      uniform=True))
-            nodes_lasso = tf.reduce_sum(nodes_vocab)
-            subtoken_lasso = tf.reduce_sum(subtoken_vocab)
+            
+            #l1_regularizer = tf.contrib.layers.l1_regularizer(scale=self.config.LASSO, scope=None)
+            #nodes_lasso = tf.contrib.layers.apply_regularization(l1_regularizer, nodes_vocab)
+            #subtoken_lasso = tf.contrib.layers.apply_regularization(l1_regularizer, subtoken_vocab)
+            
+            nodes_lasso = tf.reduce_sum(tf.abs(nodes_vocab))
+            subtoken_lasso = tf.reduce_sum(tf.abs(subtoken_vocab))
 
             # (batch, max_contexts, decoder_size)
             batched_contexts = self.compute_contexts(subtoken_vocab=subtoken_vocab, nodes_vocab=nodes_vocab,
@@ -383,7 +388,7 @@ class Model:
                                                     maxlen=self.config.MAX_TARGET_PARTS + 1, dtype=tf.float32)
 
             loss = tf.reduce_sum(crossent * target_words_nonzero) / tf.to_float(batch_size) + \
-                                                                self.config.LASSO * (nodes_lasso + subtoken_lasso)
+                    self.config.LASSO * (nodes_lasso + subtoken_lasso)
 
             if self.config.USE_MOMENTUM:
                 learning_rate = tf.train.exponential_decay(0.01, step * self.config.BATCH_SIZE,
