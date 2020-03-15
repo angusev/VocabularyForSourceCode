@@ -1,5 +1,6 @@
 import _pickle as pickle
 import os
+import sys
 import time
 
 import numpy as np
@@ -75,7 +76,7 @@ class Model:
                                           node_to_index=self.node_to_index,
                                           target_to_index=self.target_to_index,
                                           config=self.config)
-        optimizer, train_loss = self.build_training_graph(self.queue_thread.get_output())
+        optimizer, train_loss, print_nonzeros_nodes, print_nonzeros_subtoken = self.build_training_graph(self.queue_thread.get_output())
         self.print_hyperparams()
         print('Number of trainable params:',
               np.sum([np.prod(v.get_shape().as_list()) for v in tf.trainable_variables()]))
@@ -86,6 +87,9 @@ class Model:
 
         time.sleep(1)
         print('Started reader...')
+        
+        self.sess.run(print_nonzeros_nodes)
+        self.sess.run(print_nonzeros_subtoken)
 
         multi_batch_start_time = time.time()
         for iteration in range(1, (self.config.NUM_EPOCHS // self.config.SAVE_EVERY_EPOCHS) + 1):
@@ -100,11 +104,17 @@ class Model:
                         self.trace(sum_loss, batch_num, multi_batch_start_time)
                         sum_loss = 0
                         multi_batch_start_time = time.time()
-
+                
 
             except tf.errors.OutOfRangeError:
                 self.epochs_trained += self.config.SAVE_EVERY_EPOCHS
                 print('Finished %d epochs' % self.config.SAVE_EVERY_EPOCHS)
+                
+                print(f'Nonzeros number in embeddings matrices after {self.epochs_trained} epochs:', file=sys.stderr)
+                self.sess.run(print_nonzeros_nodes)
+                self.sess.run(print_nonzeros_subtoken)
+                print(file=sys.stderr)
+
                 results, precision, recall, f1, rouge = self.evaluate()
                 if self.config.BEAM_WIDTH == 0:
                     print('Accuracy after %d epochs: %.5f' % (self.epochs_trained, results))
@@ -127,7 +137,7 @@ class Model:
                         print('Best scores - epoch %d: ' % best_epoch)
                         print('Precision: %.5f, recall: %.5f, F1: %.5f' % (best_f1_precision, best_f1_recall, best_f1))
                         return
-
+ 
         if self.config.SAVE_PATH:
             self.save_model(self.sess, self.config.SAVE_PATH + '.final')
             print('Model saved in file: %s' % self.config.SAVE_PATH)
@@ -283,25 +293,28 @@ class Model:
         return true_positive, false_positive, false_negative
 
     def print_hyperparams(self):
-        print('Training batch size:\t\t\t', self.config.BATCH_SIZE)
-        print('Dataset path:\t\t\t\t', self.config.TRAIN_PATH)
-        print('Training file path:\t\t\t', self.config.TRAIN_PATH + '.train.c2s')
-        print('Validation path:\t\t\t', self.config.TEST_PATH)
-        print('Taking max contexts from each example:\t', self.config.MAX_CONTEXTS)
-        print('Random path sampling:\t\t\t', self.config.RANDOM_CONTEXTS)
-        print('Embedding size:\t\t\t\t', self.config.EMBEDDINGS_SIZE)
+        print('Training batch size:'.ljust(50), self.config.BATCH_SIZE)
+        print('Dataset path:'.ljust(50), self.config.TRAIN_PATH)
+        print('Training file path:'.ljust(50), self.config.TRAIN_PATH + '.train.c2s')
+        print('Validation path'.ljust(50), self.config.TEST_PATH)
+        print('Taking max contexts from each example:'.ljust(50), self.config.MAX_CONTEXTS)
+        print('Random path sampling:'.ljust(50), self.config.RANDOM_CONTEXTS)
+        print('Embedding size:'.ljust(50), self.config.EMBEDDINGS_SIZE)
         if self.config.BIRNN:
-            print('Using BiLSTMs, each of size:\t\t', self.config.RNN_SIZE // 2)
+            print('Using BiLSTMs, each of size:'.ljust(50), self.config.RNN_SIZE // 2)
         else:
-            print('Uni-directional LSTM of size:\t\t', self.config.RNN_SIZE)
-        print('Decoder size:\t\t\t\t', self.config.DECODER_SIZE)
-        print('Decoder layers:\t\t\t\t', self.config.NUM_DECODER_LAYERS)
-        print('Max path lengths:\t\t\t', self.config.MAX_PATH_LENGTH)
-        print('Max subtokens in a token:\t\t', self.config.MAX_NAME_PARTS)
-        print('Max target length:\t\t\t', self.config.MAX_TARGET_PARTS)
-        print('Embeddings dropout keep_prob:\t\t', self.config.EMBEDDINGS_DROPOUT_KEEP_PROB)
-        print('LSTM dropout keep_prob:\t\t\t', self.config.RNN_DROPOUT_KEEP_PROB)
-        print('Lasso coefficient:\t\t\t', self.config.LASSO)
+            print('Uni-directional LSTM of size:'.ljust(50), self.config.RNN_SIZE)
+        print('Decoder size:'.ljust(50), self.config.DECODER_SIZE)
+        print('Decoder layers:'.ljust(50), self.config.NUM_DECODER_LAYERS)
+        print('Max path lengths:'.ljust(50), self.config.MAX_PATH_LENGTH)
+        print('Max subtokens in a token:'.ljust(50), self.config.MAX_NAME_PARTS)
+        print('Max target length:'.ljust(50), self.config.MAX_TARGET_PARTS)
+        print('Embeddings dropout keep_prob:'.ljust(50), self.config.EMBEDDINGS_DROPOUT_KEEP_PROB)
+        print('LSTM dropout keep_prob:'.ljust(50), self.config.RNN_DROPOUT_KEEP_PROB)
+        print('---------Sparsification parameters----------')
+        print('Lasso coefficient:'.ljust(50), self.config.LASSO)
+        print('Group Lasso coefficient:'.ljust(50), self.config.GROUP_LASSO)
+        print('Threshold for reseting to zeros'.ljust(50), self.config.THRESHOLD)
         print('============================================')
 
     @staticmethod
@@ -358,14 +371,37 @@ class Model:
                                           initializer=tf.contrib.layers.variance_scaling_initializer(factor=1.0,
                                                                                                      mode='FAN_OUT',
                                                                                                      uniform=True))
-            
-            #l1_regularizer = tf.contrib.layers.l1_regularizer(scale=self.config.LASSO, scope=None)
-            #nodes_lasso = tf.contrib.layers.apply_regularization(l1_regularizer, nodes_vocab)
-            #subtoken_lasso = tf.contrib.layers.apply_regularization(l1_regularizer, subtoken_vocab)
-            
+            # SPARSIFICATION
+
+            nodes_mask = tf.less(tf.abs(nodes_vocab), self.config.THRESHOLD * tf.ones_like(nodes_vocab))
+            nodes_vocab = tf.multiply(nodes_vocab, tf.cast(mask, nodes_vocab.type()))
+            subtoken_mask = tf.less(tf.abs(subtoken_vocab), self.config.THRESHOLD * tf.ones_like(subtoken_vocab))
+            subtoken_vocab = tf.multiply(subtoken_vocab, tf.cast(mask, subtoken_vocab.type()))
+ 
             nodes_lasso = tf.reduce_sum(tf.abs(nodes_vocab))
             subtoken_lasso = tf.reduce_sum(tf.abs(subtoken_vocab))
+           
+            nodes_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(nodes_vocab), axis=1)))
+            subtoken_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(subtoken_vocab), axis=1)))
+            
+            #def reset_to_zero(x):
+            #    return 0. if np.abs(x) < self.config.THRESHOLD else x
 
+            #nodes_vocab = tf.map_fn(reset_to_zero, nodes_vocab)
+            #subtoken_vocab = tf.map_fn(reset_to_zero, subtoken_vocab)
+            
+            # nodes_cond = tf.less(tf.abs(nodes_vocab), tf.ones(tf.shape(nodes_vocab)) * self.config.THRESHOLD)
+            # subtoken_cond = tf.less(tf.abs(subtoken_vocab), tf.ones(tf.shape(subtoken_vocab)) * self.config.THRESHOLD)
+            # nodes_vocab = tf.where(nodes_cond, nodes_vocab, tf.zeros(tf.shape(nodes_vocab)))
+            # subtoken_vocab = tf.where(subtoken_cond, subtoken_vocab, tf.zeros(tf.shape(subtoken_vocab)))
+           
+            print_nonzeros_nodes = tf.Print(nodes_lasso,
+                                [tf.count_nonzero(nodes_vocab)], 
+                                message="NODES_VOCAB nonzeros weights:".ljust(40))
+            print_nonzeros_subtoken = tf.Print(subtoken_lasso,
+                                [tf.count_nonzero(subtoken_vocab)], 
+                                message="SUBTOKEN_VOCAB nonzeros weights:".ljust(40))
+ 
             # (batch, max_contexts, decoder_size)
             batched_contexts = self.compute_contexts(subtoken_vocab=subtoken_vocab, nodes_vocab=nodes_vocab,
                                                      source_input=path_source_indices, nodes_input=node_indices,
@@ -388,7 +424,8 @@ class Model:
                                                     maxlen=self.config.MAX_TARGET_PARTS + 1, dtype=tf.float32)
 
             loss = tf.reduce_sum(crossent * target_words_nonzero) / tf.to_float(batch_size) + \
-                    self.config.LASSO * (nodes_lasso + subtoken_lasso)
+                    self.config.LASSO * (nodes_lasso + subtoken_lasso) + \
+                    self.config.GROUP_LASSO * (nodes_group_lasso + subtoken_group_lasso)
 
             if self.config.USE_MOMENTUM:
                 learning_rate = tf.train.exponential_decay(0.01, step * self.config.BATCH_SIZE,
@@ -405,7 +442,7 @@ class Model:
 
             self.saver = tf.train.Saver(max_to_keep=10)
 
-        return train_op, loss
+        return train_op, loss, print_nonzeros_nodes, print_nonzeros_subtoken
 
     def decode_outputs(self, target_words_vocab, target_input, batch_size, batched_contexts, valid_mask,
                        is_evaluating=False):
