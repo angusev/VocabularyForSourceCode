@@ -76,7 +76,7 @@ class Model:
                                           node_to_index=self.node_to_index,
                                           target_to_index=self.target_to_index,
                                           config=self.config)
-        optimizer, train_loss, print_nonzeros_nodes, print_nonzeros_subtoken = self.build_training_graph(self.queue_thread.get_output())
+        optimizer, train_loss, print_node = self.build_training_graph(self.queue_thread.get_output())
         self.print_hyperparams()
         print('Number of trainable params:',
               np.sum([np.prod(v.get_shape().as_list()) for v in tf.trainable_variables()]))
@@ -88,8 +88,7 @@ class Model:
         time.sleep(1)
         print('Started reader...')
         
-        self.sess.run(print_nonzeros_nodes)
-        self.sess.run(print_nonzeros_subtoken)
+        self.sess.run(print_node)
 
         multi_batch_start_time = time.time()
         for iteration in range(1, (self.config.NUM_EPOCHS // self.config.SAVE_EVERY_EPOCHS) + 1):
@@ -110,9 +109,8 @@ class Model:
                 self.epochs_trained += self.config.SAVE_EVERY_EPOCHS
                 print('Finished %d epochs' % self.config.SAVE_EVERY_EPOCHS)
                 
-                print(f'Nonzeros number in embeddings matrices after {self.epochs_trained} epochs:', file=sys.stderr)
-                self.sess.run(print_nonzeros_nodes)
-                self.sess.run(print_nonzeros_subtoken)
+                print(f'Indicators after {self.epochs_trained} epochs:', file=sys.stderr)
+                self.sess.run(print_node)
                 print(file=sys.stderr)
 
                 results, precision, recall, f1, rouge = self.evaluate()
@@ -373,34 +371,23 @@ class Model:
                                                                                                      uniform=True))
             # SPARSIFICATION
 
-            nodes_mask = tf.less(tf.abs(nodes_vocab), self.config.THRESHOLD * tf.ones_like(nodes_vocab))
-            nodes_vocab = tf.multiply(nodes_vocab, tf.cast(mask, nodes_vocab.type()))
-            subtoken_mask = tf.less(tf.abs(subtoken_vocab), self.config.THRESHOLD * tf.ones_like(subtoken_vocab))
-            subtoken_vocab = tf.multiply(subtoken_vocab, tf.cast(mask, subtoken_vocab.type()))
+            nodes_mask = tf.greater(tf.abs(nodes_vocab), self.config.THRESHOLD * tf.ones_like(nodes_vocab))
+            nodes_vocab = tf.multiply(nodes_vocab, tf.cast(nodes_mask, tf.float32))
+            subtoken_mask = tf.greater(tf.abs(subtoken_vocab), self.config.THRESHOLD * tf.ones_like(subtoken_vocab))
+            subtoken_vocab = tf.multiply(subtoken_vocab, tf.cast(subtoken_mask, tf.float32))
  
             nodes_lasso = tf.reduce_sum(tf.abs(nodes_vocab))
             subtoken_lasso = tf.reduce_sum(tf.abs(subtoken_vocab))
            
-            nodes_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(nodes_vocab), axis=1)))
-            subtoken_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(subtoken_vocab), axis=1)))
-            
-            #def reset_to_zero(x):
-            #    return 0. if np.abs(x) < self.config.THRESHOLD else x
-
-            #nodes_vocab = tf.map_fn(reset_to_zero, nodes_vocab)
-            #subtoken_vocab = tf.map_fn(reset_to_zero, subtoken_vocab)
-            
-            # nodes_cond = tf.less(tf.abs(nodes_vocab), tf.ones(tf.shape(nodes_vocab)) * self.config.THRESHOLD)
-            # subtoken_cond = tf.less(tf.abs(subtoken_vocab), tf.ones(tf.shape(subtoken_vocab)) * self.config.THRESHOLD)
-            # nodes_vocab = tf.where(nodes_cond, nodes_vocab, tf.zeros(tf.shape(nodes_vocab)))
-            # subtoken_vocab = tf.where(subtoken_cond, subtoken_vocab, tf.zeros(tf.shape(subtoken_vocab)))
+            nodes_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(nodes_vocab), axis=1) + 1e-10))
+            subtoken_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(subtoken_vocab), axis=1) + 1e-10))
            
-            print_nonzeros_nodes = tf.Print(nodes_lasso,
-                                [tf.count_nonzero(nodes_vocab)], 
-                                message="NODES_VOCAB nonzeros weights:".ljust(40))
-            print_nonzeros_subtoken = tf.Print(subtoken_lasso,
-                                [tf.count_nonzero(subtoken_vocab)], 
-                                message="SUBTOKEN_VOCAB nonzeros weights:".ljust(40))
+            lasso_reg = self.config.LASSO * (nodes_lasso + subtoken_lasso)
+            group_lasso_reg = self.config.GROUP_LASSO * (nodes_group_lasso + subtoken_group_lasso)
+            
+            print_node = tf.Print(nodes_lasso,
+                                [tf.count_nonzero(nodes_vocab), tf.count_nonzero(subtoken_vocab), lasso_reg, group_lasso_reg], 
+                                message="[NODES_VOCAB nonzeros, SUBTOKEN_VOCAB nonzeros, Lasso Reg, Group Lasso Reg]\n")
  
             # (batch, max_contexts, decoder_size)
             batched_contexts = self.compute_contexts(subtoken_vocab=subtoken_vocab, nodes_vocab=nodes_vocab,
@@ -423,9 +410,8 @@ class Model:
             target_words_nonzero = tf.sequence_mask(target_lengths + 1,
                                                     maxlen=self.config.MAX_TARGET_PARTS + 1, dtype=tf.float32)
 
-            loss = tf.reduce_sum(crossent * target_words_nonzero) / tf.to_float(batch_size) + \
-                    self.config.LASSO * (nodes_lasso + subtoken_lasso) + \
-                    self.config.GROUP_LASSO * (nodes_group_lasso + subtoken_group_lasso)
+            loss = tf.reduce_sum(crossent * target_words_nonzero) / tf.to_float(batch_size) + lasso_reg + group_lasso_reg
+                    
 
             if self.config.USE_MOMENTUM:
                 learning_rate = tf.train.exponential_decay(0.01, step * self.config.BATCH_SIZE,
@@ -442,7 +428,7 @@ class Model:
 
             self.saver = tf.train.Saver(max_to_keep=10)
 
-        return train_op, loss, print_nonzeros_nodes, print_nonzeros_subtoken
+        return train_op, loss, print_node
 
     def decode_outputs(self, target_words_vocab, target_input, batch_size, batched_contexts, valid_mask,
                        is_evaluating=False):
