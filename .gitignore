@@ -10,3 +10,4 @@ slurm/
 *.swo
 *.swn
 *.swp
+.ipynb_checkpoints/

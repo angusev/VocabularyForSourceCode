@@ -229,6 +229,8 @@ class Model:
 
             print('Done testing, epoch reached')
             output_file.write(str(num_correct_predictions / total_predictions) + '\n')
+            precision, recall, f1 = self.calculate_results(true_positive, false_positive, false_negative)
+            output_file.write(f'Precision: {precision}, Recall: {recall}, F1: {f1}\n')
             # Common.compute_bleu(ref_file_name, predicted_file_name)
 
         elapsed = int(time.time() - eval_start_time)
@@ -370,24 +372,42 @@ class Model:
                                                                                                      mode='FAN_OUT',
                                                                                                      uniform=True))
             # SPARSIFICATION
-
+            
+            # setting to zero by threshold
             nodes_mask = tf.greater(tf.abs(nodes_vocab), self.config.THRESHOLD * tf.ones_like(nodes_vocab))
             nodes_vocab = tf.multiply(nodes_vocab, tf.cast(nodes_mask, tf.float32))
             subtoken_mask = tf.greater(tf.abs(subtoken_vocab), self.config.THRESHOLD * tf.ones_like(subtoken_vocab))
             subtoken_vocab = tf.multiply(subtoken_vocab, tf.cast(subtoken_mask, tf.float32))
  
+            # Lasso regularization
             nodes_lasso = tf.reduce_sum(tf.abs(nodes_vocab))
             subtoken_lasso = tf.reduce_sum(tf.abs(subtoken_vocab))
            
+            # Group Lasso regularization
             nodes_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(nodes_vocab), axis=1) + 1e-10))
             subtoken_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(subtoken_vocab), axis=1) + 1e-10))
            
+            # Regularizators multiplied by coefficients
             lasso_reg = self.config.LASSO * (nodes_lasso + subtoken_lasso)
             group_lasso_reg = self.config.GROUP_LASSO * (nodes_group_lasso + subtoken_group_lasso)
             
+            # Compute nonzeros rows
+            nodes_words_count = tf.count_nonzero(tf.reduce_sum(tf.abs(nodes_vocab), axis=1))
+            subtoken_words_count = tf.count_nonzero(tf.reduce_sum(tf.abs(subtoken_vocab), axis=1))
+            
+            # Compute nonzeros weights
+            nodes_weights_count = tf.count_nonzero(nodes_vocab)
+            subtoken_weghts_count = tf.count_nonzero(subtoken_vocab)
+            
+            
             print_node = tf.Print(nodes_lasso,
-                                [tf.count_nonzero(nodes_vocab), tf.count_nonzero(subtoken_vocab), lasso_reg, group_lasso_reg], 
-                                message="[NODES_VOCAB nonzeros, SUBTOKEN_VOCAB nonzeros, Lasso Reg, Group Lasso Reg]\n")
+                                  [nodes_weights_count,
+                                   subtoken_weghts_count,
+                                   nodes_words_count,
+                                   subtoken_words_count,
+                                   lasso_reg,
+                                   group_lasso_reg], 
+                                  message="[NODES_VOCAB weights, SUBTOKEN_VOCAB weights, NODES_VOCAB words, SUBTOKEN_VOCAB words, Lasso Reg, Group Lasso Reg]\n")
  
             # (batch, max_contexts, decoder_size)
             batched_contexts = self.compute_contexts(subtoken_vocab=subtoken_vocab, nodes_vocab=nodes_vocab,

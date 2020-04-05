@@ -68,6 +68,7 @@ class Config:
         self.BEAM_WIDTH = 1
         self.USE_MOMENTUM = True
         self.RELEASE = args.release
+        
         self.LASSO = args.lasso
         self.GROUP_LASSO = args.grouplasso
         self.THRESHOLD = args.threshold
