@@ -1,7 +1,6 @@
 import os
 import secrets
 from datetime import datetime
-
 from argparse import ArgumentParser
 
 if __name__ == '__main__':
@@ -9,9 +8,8 @@ if __name__ == '__main__':
     parser.add_argument('--lasso', action='store', default=0, type=float, help='L1-regularisation on embeddings layer coefficient')
     parser.add_argument('--grouplasso', action='store', default=0, type=float, help='Group Lasso regularisation on embeddings \
             layer coefficient')
-    parser.add_argument('--threshold', action='store', default=1e10, type=float, help='Threshold applying for reseting values of tensors \
+    parser.add_argument('--threshold', action='store', default=-1, type=float, help='Threshold applying for reseting values of tensors \
             to zeros')
-
 
     args = parser.parse_args()
 
@@ -32,6 +30,7 @@ if __name__ == '__main__':
     os.system('set -e')
     
     python_command = f'python3 -u code2seq.py --data {data} --test {test_data} --save_prefix {model_dir}/model --lasso {lasso} --grouplasso {grouplasso} --threshold {threshold}'
+    
     slurm_command = f'sbatch --error={model_dir}/%j.err --output={model_dir}/%j.out -J c2s --gres=gpu:1 -c 4 --wrap=\"{python_command}\"'
     os.system(slurm_command)
 

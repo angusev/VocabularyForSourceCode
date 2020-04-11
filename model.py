@@ -53,7 +53,8 @@ class Model:
             print('Loaded target word vocab. size: %d' % self.target_vocab_size)
 
             self.node_to_index, self.index_to_node, self.nodes_vocab_size = \
-                Common.load_vocab_from_dict(node_to_count, add_values=[Common.PAD, Common.UNK], max_size=None)
+                Common.load_vocab_from_dict(node_to_count, add_values=[Common.PAD, Common.UNK], 
+                                            max_size=config.NODES_VOCAB_MAX_SIZE)
             print('Loaded nodes vocab. size: %d' % self.nodes_vocab_size)
             self.epochs_trained = 0
 

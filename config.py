@@ -11,7 +11,8 @@ class Config:
         config.SHUFFLE_BUFFER_SIZE = 10000
         config.CSV_BUFFER_SIZE = 100 * 1024 * 1024  # 100 MB
         config.MAX_CONTEXTS = 200
-        config.SUBTOKENS_VOCAB_MAX_SIZE = 190000
+        config.SUBTOKENS_VOCAB_MAX_SIZE = 2061 # 190000
+        config.NODES_VOCAB_MAX_SIZE = 81 # None
         config.TARGET_VOCAB_MAX_SIZE = 27000
         config.EMBEDDINGS_SIZE = 128
         config.RNN_SIZE = 128 * 2  # Two LSTMs to embed paths, each of size 128
