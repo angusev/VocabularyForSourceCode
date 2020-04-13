@@ -11,8 +11,6 @@ class Config:
         config.SHUFFLE_BUFFER_SIZE = 10000
         config.CSV_BUFFER_SIZE = 100 * 1024 * 1024  # 100 MB
         config.MAX_CONTEXTS = 200
-        config.SUBTOKENS_VOCAB_MAX_SIZE = 2061 # 190000
-        config.NODES_VOCAB_MAX_SIZE = 81 # None
         config.TARGET_VOCAB_MAX_SIZE = 27000
         config.EMBEDDINGS_SIZE = 128
         config.RNN_SIZE = 128 * 2  # Two LSTMs to embed paths, each of size 128
@@ -51,7 +49,6 @@ class Config:
         self.TEST_PATH = args.test_path if args.test_path is not None else ''
         self.DATA_NUM_CONTEXTS = 0
         self.MAX_CONTEXTS = 0
-        self.SUBTOKENS_VOCAB_MAX_SIZE = 0
         self.TARGET_VOCAB_MAX_SIZE = 0
         self.EMBEDDINGS_SIZE = 0
         self.RNN_SIZE = 0
@@ -70,6 +67,8 @@ class Config:
         self.USE_MOMENTUM = True
         self.RELEASE = args.release
         
+        self.SUBTOKENS_VOCAB_MAX_SIZE = args.subtoken_words
+        self.NODES_VOCAB_MAX_SIZE = args.nodes_words
         self.LASSO = args.lasso
         self.GROUP_LASSO = args.grouplasso
         self.THRESHOLD = args.threshold

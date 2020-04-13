@@ -25,14 +25,17 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=239)
 
     parser.add_argument('--lasso', action='store', default=0, type=float, help='L1-regularisation on embeddings layer coefficient')
-    parser.add_argument('--grouplasso', action='store', default=0, type=float, help='Group Lasso regularisation on embeddings \
-            layer coefficient')
-    parser.add_argument('--threshold', action='store', default=-1, type=float, help='Threshold applying for reseting values of tensors \
-            to zeros')
-
+    parser.add_argument('--grouplasso', action='store', default=0, type=float, help='Group Lasso regularisation on embeddings layer coefficient')
+    parser.add_argument('--threshold', action='store', default=-1, type=float, help='Threshold applying for reseting values of tensors to zeros')
+    
+    parser.add_argument('--subtoken_words', action='store', default=190000, type=int, help='SUBTOKEN_VOCAB words max number restriction')
+    parser.add_argument('--nodes_words', action='store', default=-1, type=int, help='NODES_VOCAB words max number restriction')
 
 
     args = parser.parse_args()
+    
+    if args.nodes_words == -1:
+        args.nodes_words = None
 
     np.random.seed(args.seed)
     tf.set_random_seed(args.seed)
