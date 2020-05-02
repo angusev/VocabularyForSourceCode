@@ -6,6 +6,18 @@ from config import Config
 from interactive_predict import InteractivePredictor
 from model import Model
 
+
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+    
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument("-d", "--data", dest="data_path",
@@ -20,6 +32,7 @@ if __name__ == '__main__':
     parser.add_argument('--release', action='store_true',
                         help='if specified and loading a trained model, release the loaded model for a smaller model '
                              'size.')
+  
     parser.add_argument('--predict', action='store_true')
     parser.add_argument('--debug', action='store_true')
     parser.add_argument('--seed', type=int, default=239)
@@ -30,7 +43,8 @@ if __name__ == '__main__':
     
     parser.add_argument('--subtoken_words', action='store', default=190000, type=int, help='SUBTOKEN_VOCAB words max number restriction')
     parser.add_argument('--nodes_words', action='store', default=-1, type=int, help='NODES_VOCAB words max number restriction')
-
+    parser.add_argument('--sparse_nodes', type=str2bool, default=True,  help="Flag responcing for NODES_VOCAB embeddings sparsification")
+    parser.add_argument('--sparse_subtoken', type=str2bool, default=True,  help="Flag responcing for SUBTOKEN_VOCAB embeddings sparsification")
 
     args = parser.parse_args()
     

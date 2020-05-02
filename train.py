@@ -3,6 +3,18 @@ import secrets
 from datetime import datetime
 from argparse import ArgumentParser
 
+
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+       
+    
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--lasso', action='store', default=0, type=float, help='L1-regularisation on embeddings layer coefficient')
@@ -13,8 +25,11 @@ if __name__ == '__main__':
     
     parser.add_argument('--subtoken_words', action='store', default=190000, type=int, help='SUBTOKEN_VOCAB words max number restriction')
     parser.add_argument('--nodes_words', action='store', default=-1, type=int, help='NODES_VOCAB words max number restriction')
-
+    parser.add_argument("--sparse_nodes", type=str2bool, nargs='?', const=False, default=True,  help="Flag responcing for NODES_VOCAB embeddings sparsification")
+    parser.add_argument("--sparse_subtoken", type=str2bool, nargs='?', const=False, default=True,  help="Flag responcing for SUBTOKEN_VOCAB embeddings sparsification")
     args = parser.parse_args()
+    
+    
 
     type = 'java-small-model'
     dataset_name = 'java-small'
@@ -36,9 +51,17 @@ if __name__ == '__main__':
     os.system(f'mkdir -p {model_dir}')
     os.system('set -e')
     
-    python_command = f'python3 -u code2seq.py --data {data} --test {test_data} --save_prefix {model_dir}/model --lasso {lasso} --grouplasso {grouplasso} --threshold {threshold} --subtoken_words {subtoken_vocab_max_size} --nodes_words {nodes_vocab_max_size}'
+    python_command = f'python3 -u code2seq.py --data {data}\
+                                              --test {test_data}\
+                                              --save_prefix {model_dir}/model\
+                                              --lasso {lasso}\
+                                              --grouplasso {grouplasso}\
+                                              --threshold {threshold}\
+                                              --subtoken_words {subtoken_vocab_max_size}\
+                                              --nodes_words {nodes_vocab_max_size}\
+                                              --sparse_nodes {args.sparse_nodes}\
+                                              --sparse_subtoken {args.sparse_subtoken}'
     
     slurm_command = f'sbatch --error={model_dir}/%j.err --output={model_dir}/%j.out -J c2s --gres=gpu:1 -c 4 --wrap=\"{python_command}\"'
     os.system(slurm_command)
-
 

@@ -72,6 +72,8 @@ class Config:
         self.LASSO = args.lasso
         self.GROUP_LASSO = args.grouplasso
         self.THRESHOLD = args.threshold
+        self.SPARSE_NODES = args.sparse_nodes
+        self.SPARSE_SUBTOKEN = args.sparse_subtoken
 
     @staticmethod
     def get_debug_config(args):
@@ -100,6 +102,4 @@ class Config:
         config.RANDOM_CONTEXTS = True
         config.BEAM_WIDTH = 0
         config.USE_MOMENTUM = False
-        config.LASSO = 0
-        config.GROUP_LASSO = 0
         return config

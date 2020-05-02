@@ -25,7 +25,8 @@ class Model:
 
         self.eval_placeholder = None
         self.predict_placeholder = None
-        self.eval_predicted_indices_op, self.eval_top_values_op, self.eval_true_target_strings_op, self.eval_topk_values = None, None, None, None
+        self.eval_predicted_indices_op, self.eval_top_values_op, self.eval_true_target_strings_op, self.eval_topk_values = \
+                                                                                                    None, None, None, None
         self.predict_top_indices_op, self.predict_top_scores_op, self.predict_target_strings_op = None, None, None
         self.subtoken_to_index = None
 
@@ -316,6 +317,8 @@ class Model:
         print('Lasso coefficient:'.ljust(50), self.config.LASSO)
         print('Group Lasso coefficient:'.ljust(50), self.config.GROUP_LASSO)
         print('Threshold for reseting to zeros'.ljust(50), self.config.THRESHOLD)
+        print('NODES_VOCAB sparsisication flag'.ljust(50), self.config.SPARSE_NODES)
+        print('SUBTOKEN_VOCAB sparsisication flag'.ljust(50), self.config.SPARSE_SUBTOKEN)
         print('============================================')
 
     @staticmethod
@@ -375,18 +378,28 @@ class Model:
             # SPARSIFICATION
             
             # setting to zero by threshold
-            nodes_mask = tf.greater(tf.abs(nodes_vocab), self.config.THRESHOLD * tf.ones_like(nodes_vocab))
-            nodes_vocab = tf.multiply(nodes_vocab, tf.cast(nodes_mask, tf.float32))
-            subtoken_mask = tf.greater(tf.abs(subtoken_vocab), self.config.THRESHOLD * tf.ones_like(subtoken_vocab))
-            subtoken_vocab = tf.multiply(subtoken_vocab, tf.cast(subtoken_mask, tf.float32))
+            if self.config.SPARSE_NODES:
+                nodes_mask = tf.greater(tf.abs(nodes_vocab), self.config.THRESHOLD * tf.ones_like(nodes_vocab))
+                nodes_vocab = tf.multiply(nodes_vocab, tf.cast(nodes_mask, tf.float32))
+            if self.config.SPARSE_SUBTOKEN:
+                subtoken_mask = tf.greater(tf.abs(subtoken_vocab), self.config.THRESHOLD * tf.ones_like(subtoken_vocab))
+                subtoken_vocab = tf.multiply(subtoken_vocab, tf.cast(subtoken_mask, tf.float32))
  
             # Lasso regularization
-            nodes_lasso = tf.reduce_sum(tf.abs(nodes_vocab))
-            subtoken_lasso = tf.reduce_sum(tf.abs(subtoken_vocab))
+            nodes_lasso = 0.
+            subtoken_lasso = 0.
+            if self.config.SPARSE_NODES:
+                nodes_lasso = tf.reduce_sum(tf.abs(nodes_vocab))
+            if self.config.SPARSE_SUBTOKEN:
+                subtoken_lasso = tf.reduce_sum(tf.abs(subtoken_vocab))
            
             # Group Lasso regularization
-            nodes_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(nodes_vocab), axis=1) + 1e-10))
-            subtoken_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(subtoken_vocab), axis=1) + 1e-10))
+            nodes_group_lasso = 0.
+            subtoken_group_lasso = 0.
+            if self.config.SPARSE_NODES:
+                nodes_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(nodes_vocab), axis=1) + 1e-10))
+            if self.config.SPARSE_SUBTOKEN:
+                subtoken_group_lasso = tf.reduce_sum(tf.sqrt(tf.reduce_sum(tf.square(subtoken_vocab), axis=1) + 1e-10))
            
             # Regularizators multiplied by coefficients
             lasso_reg = self.config.LASSO * (nodes_lasso + subtoken_lasso)

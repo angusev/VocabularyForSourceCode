@@ -5,7 +5,7 @@ import numpy as np
 if __name__ == "__main__":
     lasso_l, lasso_r = (-6, -4)
     bins_lasso = (lasso_r - lasso_l) * 2 + 1
-    group_lasso_l, group_lasso_r = (-6, -4)
+    group_lasso_l, group_lasso_r = (-5, -3)
     bins_group_lasso = (group_lasso_r - group_lasso_l) * 2 + 1
     
     lasso_space = np.logspace(lasso_l, lasso_r, bins_lasso)
