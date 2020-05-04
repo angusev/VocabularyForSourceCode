@@ -2,9 +2,9 @@ class Config:
     @staticmethod
     def get_default_config(args):
         config = Config(args)
-        config.NUM_EPOCHS = 3000
-        config.SAVE_EVERY_EPOCHS = 1
-        config.PATIENCE = 10
+        config.NUM_EPOCHS = 150 # 3000
+        config.SAVE_EVERY_EPOCHS = 5
+        config.PATIENCE = 150 # 10
         config.BATCH_SIZE = 512
         config.TEST_BATCH_SIZE = 256
         config.READER_NUM_PARALLEL_BATCHES = 1

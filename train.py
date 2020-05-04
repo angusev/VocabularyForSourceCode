@@ -20,8 +20,7 @@ if __name__ == '__main__':
     parser.add_argument('--lasso', action='store', default=0, type=float, help='L1-regularisation on embeddings layer coefficient')
     parser.add_argument('--grouplasso', action='store', default=0, type=float, help='Group Lasso regularisation on embeddings \
             layer coefficient')
-    parser.add_argument('--threshold', action='store', default=-1, type=float, help='Threshold applying for reseting values of tensors \
-            to zeros')
+    parser.add_argument('--threshold', action='store', default=-1, type=float, help='Threshold applying for reseting values of tensors to zeros')
     
     parser.add_argument('--subtoken_words', action='store', default=190000, type=int, help='SUBTOKEN_VOCAB words max number restriction')
     parser.add_argument('--nodes_words', action='store', default=-1, type=int, help='NODES_VOCAB words max number restriction')
@@ -29,8 +28,6 @@ if __name__ == '__main__':
     parser.add_argument("--sparse_subtoken", type=str2bool, nargs='?', const=False, default=True,  help="Flag responcing for SUBTOKEN_VOCAB embeddings sparsification")
     args = parser.parse_args()
     
-    
-
     type = 'java-small-model'
     dataset_name = 'java-small'
     data_dir = 'data/java-small'
@@ -62,6 +59,6 @@ if __name__ == '__main__':
                                               --sparse_nodes {args.sparse_nodes}\
                                               --sparse_subtoken {args.sparse_subtoken}'
     
-    slurm_command = f'sbatch --error={model_dir}/%j.err --output={model_dir}/%j.out -J c2s --gres=gpu:1 -c 4 --wrap=\"{python_command}\"'
+    slurm_command = f'sbatch --error={model_dir}/%j.err --time=3-0:0 --output={model_dir}/%j.out -J c2s --gres=gpu:1 -c 4 --wrap=\"{python_command}\"'
     os.system(slurm_command)
 
